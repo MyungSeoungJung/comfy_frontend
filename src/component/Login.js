@@ -11,7 +11,7 @@ function Login() {
       <div className="login_top">
         <ul className="login_line">
           <li className="login_login">
-            <Link to="/login"> Login </Link>
+            <Link to="/"> Login </Link>
           </li>
           <li className="login_signup">
             <Link to="/signup"> Sign Up </Link>
@@ -19,12 +19,13 @@ function Login() {
         </ul>
       </div>
       <div className="login_form">
-        <form>
+        <form action="http://localhost:8080/auth/signIn" method="post">
           <div className="login_input">
-            <input type="text" className="login_email" placeholder="이메일" />
+            <input name="email" type="text" className="login_email" placeholder="이메일" />
           </div>
           <div className="login_input">
             <input
+              name="password"
               type="password"
               className="login_password"
               placeholder="비밀번호"

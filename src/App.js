@@ -10,8 +10,8 @@ function App() {
   return (
     <div className="App" id="App">
       <Routes>
-        <Route path="/" element={<Main />} />
-        <Route path="/login" element={<Login />} />
+        <Route path="/" element={<Login />} />
+        <Route path="/Main" element={<Main />} />
         <Route path="/signup" element={<Signup />} />
       </Routes>
       {/* 채팅위젯 */}

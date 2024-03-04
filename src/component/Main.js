@@ -2,6 +2,7 @@ import React from "react";
 import { SiSpeedtest } from "react-icons/si";
 import { CiHeart } from "react-icons/ci";
 import "../styles/Main.css";
+import { Outlet } from "react-router";
 
 function Main() {
   return (
@@ -20,17 +21,17 @@ function Main() {
               <li className="adminpost">
                 {" "}
                 <SiSpeedtest />
-                <a href="/"> 공지사항 </a>{" "}
+                <a href="/"> 알림 </a>{" "}
               </li>
               <li className="makeroom">
                 {" "}
                 <SiSpeedtest />
-                <a href="/"> 번개 만들기 </a>{" "}
+                <a href="/"> 스터디 만들기 </a>{" "}
               </li>
               <li className="room">
                 {" "}
                 <SiSpeedtest />
-                <a href="/"> 번개 리스트 </a>{" "}
+                <a href="/"> 스터디 리스트 </a>{" "}
               </li>
               <li className="info">
                 {" "}
@@ -41,14 +42,17 @@ function Main() {
           </div>
         </div>
       </div>
-      <div className="contents">
+      <main>
+        <Outlet />
+      </main>
+      {/* <div className="contents">
         <div className="main">
           <div className="section">
             <div className="rooms">
               <div className="head">
                 <a href="/">
                   <i> ICON </i>
-                  {/* 여긴 이름들어갈부분 */}
+          
                 </a>
               </div>
               <div className="middle">
@@ -67,7 +71,6 @@ function Main() {
               <div className="head">
                 <a href="/">
                   <i> ICON </i>
-                  {/* 여긴 이름들어갈부분 */}
                 </a>
               </div>
               <div className="middle">
@@ -86,7 +89,6 @@ function Main() {
               <div className="head">
                 <a href="/">
                   <i> ICON </i>
-                  {/* 여긴 이름들어갈부분 */}
                 </a>
               </div>
               <div className="middle">
@@ -152,7 +154,7 @@ function Main() {
             </div>
           </div>
         </div>
-      </div>
+      </div> */}
     </div>
   );
 }
