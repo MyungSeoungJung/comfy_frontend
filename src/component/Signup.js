@@ -28,7 +28,7 @@ function Signup() {
       const response = await axios.post(`${baseURL}auth/signUp`, data);
 
       // 가입이 성공하면 로그인 페이지로 이동
-      window.location.href = "/";
+      window.location.href = "/Login";
     } catch (error) {
       // 가입 실패 시 에러 처리 코드
       console.error("가입 실패:", error);
@@ -43,10 +43,10 @@ function Signup() {
       <div className="login_top">
         <ul className="login_line">
           <li className="login_login">
-            <Link to="/"> Login </Link>
+            <Link to="/Login"> Login </Link>
           </li>
           <li className="login_signup">
-            <Link to="/signup"> Sign Up </Link>
+            <Link to="/SignUp"> Sign Up </Link>
           </li>
         </ul>
       </div>

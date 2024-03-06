@@ -1,0 +1,146 @@
+/* 채팅방 및 메인컨텐츠  */
+.contents {
+    margin-left: 300px;
+}
+
+.contents .main {
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    min-height: 100vh;
+    position: relative;
+    width: 100%;
+}
+
+.contents .main .section {
+    width: 420px;
+}
+
+.contents .main .rooms {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: 20px 0;
+    max-width: 630px;
+    width: 100%;
+}
+
+.contents .main .rooms .head {
+    align-items: center;
+    display: flex;
+    font-size: 12px;
+    font-weight: 900;
+    justify-content: space-between;
+}
+
+.contents .main .rooms .middle {
+    border-radius: 14px;
+    height: 488px;
+    overflow: hidden;
+    padding: 20px 0;
+    width: 420px;
+    border: 1px solid black;
+}
+
+.contents .main .rooms .low {
+    display: flex;
+    flex-direction: column;
+}
+
+.contents .main .rooms .low .likes {
+    align-items: center;
+    display: flex;
+    padding: 20px 0;
+    margin-bottom: 10px;
+    border-bottom: 1px solid silver;
+}
+
+.contents .main .rooms .low .likes .heart svg {
+    content: "";
+    cursor: pointer;
+    display: inline-block;
+    height: 24px;
+    position: relative;
+    width: 24px;
+    z-index: 2;
+}
+
+.contents .main .rooms .low .likes>a {
+    margin-left: 10px;
+    height: 24px;
+    width: 100%;
+}
+
+/*  인기 게시글 */
+
+.hots {
+    font-weight: 900;
+    padding-left: 100px;
+    padding-top: 50px;
+    position: relative;
+}
+
+.hots .items {
+    position: sticky;
+    top: 26px;
+}
+
+.hots .items h4 {
+    font-size: 15px;
+    color: silver;
+    margin-bottom: 10px;
+}
+
+.items ul li {
+    margin-bottom: 28px;
+    width: 228px;
+}
+
+.items ul li .head {
+    align-items: center;
+    color: black;
+    display: flex;
+    font-size: 14px;
+}
+
+.items ul li .middle {
+    border: 1px solid black;
+    border-radius: 15px;
+    height: 124px;
+    margin: 12px 0;
+    overflow: hidden;
+    position: relative;
+}
+
+/*  검색 부분  */
+
+.search {
+    font-weight: 900;
+    padding-left: 70px;
+    padding-top: 50px;
+    position: relative;
+}
+
+.search .inner {
+    position: sticky;
+    top: 26px;
+}
+
+.search .inner input {
+    width: 400px;
+    border: 1px solid black;
+    border-radius: 10px;
+    padding: 10px;
+}
+
+.search .inner ul li a {
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.search_title {
+    font-size: 20px;
+    margin-top: 30px;
+    color: silver;
+}

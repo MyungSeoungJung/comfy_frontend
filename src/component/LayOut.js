@@ -1,50 +1,56 @@
-import React from "react";
+import React, { useState } from "react";
 import { SiSpeedtest } from "react-icons/si";
-import { CiHeart } from "react-icons/ci";
-import "../styles/Main.css";
+import "../styles/LayOut.css";
 import { Outlet } from "react-router";
+import { Link } from "react-router-dom";
 
-function Main() {
+function LayOut() {
+  // const [modalHandle, setModalHandle] = useState(false)
   return (
-    <div>
+    <div >
       <div className="navigation">
         <div className="inner">
           <h1 className="logo">
-            <a href="/"></a>
+            <a href=""></a>
           </h1>
           <div className="tabs">
             <ul>
               <li className="home">
                 <SiSpeedtest />
-                <a href="/"> 홈 </a>
+                <Link to="">홈 </Link>
               </li>
               <li className="adminpost">
                 {" "}
                 <SiSpeedtest />
-                <a href="/"> 알림 </a>{" "}
+                <a href=""> 알림 </a>{" "}
               </li>
               <li className="makeroom">
                 {" "}
                 <SiSpeedtest />
-                <a href="/"> 스터디 만들기 </a>{" "}
+                <Link to="CreateStudyGruop">스터디 만들기 </Link>
               </li>
               <li className="room">
                 {" "}
                 <SiSpeedtest />
-                <a href="/"> 스터디 리스트 </a>{" "}
+                <a href=""> 스터디 리스트 </a>{" "}
               </li>
               <li className="info">
                 {" "}
                 <SiSpeedtest />
-                <a href="/"> 나의 프로필 </a>
+                <a href=""> 나의 프로필 </a>
               </li>
             </ul>
           </div>
         </div>
       </div>
-      <main>
-        <Outlet />
-      </main>
+      <div className="contents">
+        <main style={{
+          width: "100%", height: "100%",
+        }} className="main">
+          <Outlet />
+        </main>
+      </div>
+      {/* 주석 */}
       {/* <div className="contents">
         <div className="main">
           <div className="section">
@@ -52,7 +58,7 @@ function Main() {
               <div className="head">
                 <a href="/">
                   <i> ICON </i>
-          
+
                 </a>
               </div>
               <div className="middle">
@@ -155,8 +161,10 @@ function Main() {
           </div>
         </div>
       </div> */}
+      {/* 주석 */}
+
     </div>
   );
 }
 
-export default Main;
+export default LayOut;

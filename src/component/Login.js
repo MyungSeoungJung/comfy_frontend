@@ -11,10 +11,10 @@ function Login() {
       <div className="login_top">
         <ul className="login_line">
           <li className="login_login">
-            <Link to="/"> Login </Link>
+            <Link to="/Login"> Login </Link>
           </li>
           <li className="login_signup">
-            <Link to="/signup"> Sign Up </Link>
+            <Link to="/SignUp"> Sign Up </Link>
           </li>
         </ul>
       </div>
