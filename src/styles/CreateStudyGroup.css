@@ -1,0 +1,117 @@
+button {
+    border-radius: 8px;
+}
+
+.create-study-body {
+    width: 80%;
+    margin-top: 50px;
+    display: flex;
+    flex-direction: row;
+
+}
+
+/* 가운데 검색 & main 컨테이너 */
+.create-study-center {
+    display: flex;
+    flex: 3;
+    min-height: 100vh;
+    flex-direction: column;
+}
+
+
+/* 모집중 모집완료 컨테이너 */
+.create-study-state {
+    display: flex;
+    flex-direction: row;
+}
+
+
+/*  오른쪽 인기태그 */
+.create-study-side {
+    display: flex;
+    flex: 1;
+    height: 200px;
+    background-color: beige;
+    margin-left: 140px;
+}
+
+
+/* 스터디, 태그로 검색 부분 div */
+.create-study-search {
+    display: flex;
+    flex-direction: column;
+}
+
+/* 스터디, 태그로 검색 input */
+.create-study-search input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+
+/* 스터디 검색 div */
+.create-study-search>div:nth-of-type(1) {
+    display: flex;
+    flex-direction: row;
+}
+
+/* 스터디 검색 button */
+.create-study-search>div:nth-of-type(1)>button {
+    background-color: #00c471;
+    min-width: 96px;
+    margin-left: 15px;
+    color: white;
+}
+
+/* 태그로 검색 div */
+.create-study-search>div:nth-of-type(2) {
+    display: flex;
+    flex-direction: row;
+}
+
+/* 초기화 button */
+.create-study-search>div:nth-of-type(2)>button {
+    background-color: white;
+    min-width: 96px;
+    margin-left: 15px;
+    color: black;
+}
+
+/* 메인 영역 컨테이너 */
+.create-study-content {
+    height: 100%;
+}
+
+/* 컨텐츠 최신순, 좋아요순 글쓰기 컨테이너*/
+.create-study-content-top {
+    display: flex;
+    flex-direction: row;
+    height: 40px;
+}
+
+/* 최신순, 좋아요순 div */
+.create-study-content-top>div:nth-of-type(1) {
+    display: flex;
+    flex: 0.9;
+    align-items: center;
+}
+
+/* 글쓰기 버튼 div */
+.create-study-content-top>div:nth-of-type(2) {
+    display: flex;
+    flex: 0.1;
+}
+
+.create-study-content-top>div:nth-of-type(2) button {
+    background-color: #3e4042;
+    min-width: 96px;
+    margin-left: 15px;
+    color: white;
+}
+
+/* 게시글 콘텐츠 부분 div */
+.create-study-content-main {
+    height: 100%;
+}

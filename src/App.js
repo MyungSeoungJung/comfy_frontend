@@ -7,16 +7,18 @@ import LayOut from "./component/LayOut.js";
 import ChatWidget from "./component/ChatWidget.js";
 import CreateStudyGruop from "./component/study/CreateStudyGroup.js"
 import Home from "./component/Home.js";
+import WriteModal from "./component/writeModal/WriteModal.js";
 function App() {
 
   const navigate = useNavigate();
 
-  useEffect(() => {
-    const token = getCookie('token');
-    if (!token) {
-      navigate('/login', { replace: true });
-    }
-  }, [navigate]);
+  // useEffect(() => {
+
+  //   const token = getCookie('token');
+  //   if (!token) {
+  //     navigate('/login', { replace: true });
+  //   }
+  // }, [navigate]);
 
   return (
     <div className="App" id="App">
@@ -30,6 +32,8 @@ function App() {
       </Routes>
       {/* 채팅위젯 */}
       <ChatWidget />
+
+
     </div>
   );
 }
