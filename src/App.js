@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Routes, Route, useNavigate } from "react-router-dom"; import "./reset.css";
 import { getCookie } from './utils/cookie.js';
 import Login from "./component/Login.js";
@@ -29,10 +29,11 @@ function App() {
           <Route index element={<Home />} />
           <Route key="CreateStudyGruop" path="CreateStudyGruop" element={<CreateStudyGruop />} />
         </Route>
+
       </Routes>
+
       {/* 채팅위젯 */}
       <ChatWidget />
-
 
     </div>
   );

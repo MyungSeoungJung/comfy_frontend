@@ -7,9 +7,14 @@ import WriteModal from "../writeModal/WriteModal";
 const CreateStudyGruop = () => {
     const [writeModalHandle, setWriteModalHandle] = useState(false);
 
-    const WriteModalOpen = () => {
+    const openWriteModal = () => {
         setWriteModalHandle(true);
-    }
+    };
+
+    const closeWriteModal = () => {
+        setWriteModalHandle(false);
+    };
+
     return (
         <>
             {/* 메인 */}
@@ -34,7 +39,7 @@ const CreateStudyGruop = () => {
                     <div className="create-study-content">
                         <div className="create-study-content-top">
                             <div><p>최신순</p><p>좋아요순</p></div>
-                            <div> <button onClick={WriteModalOpen}>글쓰기</button></div>
+                            <div> <button onClick={openWriteModal}>글쓰기</button></div>
                         </div>
                         {/* 게시글 부분 */}
 
@@ -54,7 +59,7 @@ const CreateStudyGruop = () => {
                     <p>인기 태그</p>
                 </aside>
                 {/* side 인기태그 */}
-                {writeModalHandle && (<WriteModal></WriteModal>)}
+                {writeModalHandle && <WriteModal isOpen={openWriteModal} onClose={closeWriteModal} />}
             </div>
             {/* 메인 */}
         </>
