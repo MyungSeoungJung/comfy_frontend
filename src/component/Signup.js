@@ -10,6 +10,8 @@ function Signup() {
   const [password, setPassword] = useState("");
   const [passwordCheck, setPasswordCheck] = useState("");
 
+  const baseURL = process.env.REACT_APP_BASE_URL;
+
   const handleSubmit = async (e) => {
     e.preventDefault(); // 기본 제출 이벤트 방지c
 
@@ -40,7 +42,7 @@ function Signup() {
       <div className="login_top">
         <ul className="login_line">
           <li className="login_login">
-            <Link to="/Login"> Login </Link>
+            <Link to="/login"> Login </Link>
           </li>
           <li className="login_signup">
             <Link to="/SignUp"> Sign Up </Link>
