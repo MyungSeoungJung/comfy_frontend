@@ -1,6 +1,6 @@
 import React from "react";
 import ChatBot from "react-simple-chatbot";
-import "../styles/Chatbot.css";
+import "../../styles/Chatbot.css";
 
 const steps = [
   //////////질문 카테고리 선택

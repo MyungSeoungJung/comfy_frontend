@@ -19,9 +19,14 @@ function Login() {
         </ul>
       </div>
       <div className="login_form">
-        <form action="http://localhost:8080/auth/signIn" method="post">
+        <form action="http://172.30.1.98:8080/auth/signIn" method="post">
           <div className="login_input">
-            <input name="email" type="text" className="login_email" placeholder="이메일" />
+            <input
+              name="email"
+              type="text"
+              className="login_email"
+              placeholder="이메일"
+            />
           </div>
           <div className="login_input">
             <input
