@@ -1,8 +1,8 @@
 // ChatWidget.js
 import React, { useState } from "react";
-import "../styles/ChatWidget.css";
+import "../../styles/ChatWidget.css";
 
-import CustomChatbot from "./Chatbot.js";
+import CustomChatbot from "../chatbot/Chatbot.js";
 
 const ChatWidget = () => {
   const [isChatVisible, setIsChatVisible] = useState(false);
