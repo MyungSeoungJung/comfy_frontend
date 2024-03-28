@@ -4,7 +4,6 @@ button {
 
 .create-study-body {
     width: 80%;
-    margin-top: 50px;
     display: flex;
     flex-direction: row;
 
@@ -18,11 +17,30 @@ button {
     flex-direction: column;
 }
 
+.create-study-banner {
+    background-color: #333b3d;
+    width: 100%;
+    height: 100px;
+    color: white;
+}
+
+.create-study-contain {
+    display: flex;
+    flex: 3;
+    min-height: 100vh;
+    flex-direction: column;
+}
 
 /* 모집중 모집완료 컨테이너 */
 .create-study-state {
     display: flex;
     flex-direction: row;
+    margin-bottom: 20px;
+}
+
+.create-study-state>button {
+    margin-right: 12px;
+    background-color: white;
 }
 
 
