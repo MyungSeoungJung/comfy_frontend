@@ -1,0 +1,24 @@
+ul {
+  list-style: none;
+  margin: 0;
+}
+
+a {
+  outline: none;
+  text-decoration: none;
+}
+
+*,
+:after,
+:before {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  border: 0;
+  box-sizing: border-box;
+  font-family: Pretendard-Regular, sans-serif;
+  font-size: 16px;
+  margin: 0;
+  padding: 0;
+  text-rendering: optimizeLegibility;
+  vertical-align: initial;
+}
