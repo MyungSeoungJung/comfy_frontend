@@ -10,6 +10,9 @@ function Signup() {
   const [password, setPassword] = useState("");
   const [passwordCheck, setPasswordCheck] = useState("");
 
+  // 환경 변수에서 baseURL 가져오기
+  const baseURL = process.env.REACT_APP_BASE_URL;
+
   const handleSubmit = async (e) => {
     e.preventDefault(); // 기본 제출 이벤트 방지c
 

@@ -1,9 +1,3 @@
-input {
-    width: 100%;
-    border: none;
-    outline: none;
-}
-
 .modal-container {
     display: flex;
     align-items: center;
@@ -18,36 +12,32 @@ input {
 }
 
 .modal-wrapper {
-    display: flex;
-    flex-direction: column;
     position: relative;
-    width: 800px;
-    height: 900px;
+    width: 700px;
+    height: 700px;
     background: white;
     padding: 20px;
     border-radius: 10px;
-    padding-bottom: 0px;
 }
 
 /*  창닫기 버튼 */
-/* .modal-close-button {
+.modal-close-button {
     position: absolute;
     top: 10px;
     right: 10px;
     cursor: pointer;
     padding: 5px 10px;
-    background-color: white;
+    background-color: #ccc;
     border: none;
     border-radius: 5px;
     color: #333;
-} */
+}
 
 /* 질문 스터디 고민있어요 div */
 .write-modal-category {
     display: flex;
     flex-direction: row;
     margin-bottom: 20px;
-    flex: 0.02;
 }
 
 .write-modal-category>p:nth-of-type(2) {
@@ -62,8 +52,8 @@ input {
 .write-modal-content {
     display: flex;
     flex-direction: column;
-    padding-bottom: 10px;
-    flex: 1;
+    height: 100%;
+    padding-bottom: 30px;
 }
 
 .write-modal-content>div {
@@ -73,80 +63,18 @@ input {
     margin-bottom: 10px;
 }
 
-#titleInput {
-    height: 50px;
-    font-size: 2rem;
-}
-
-#tagInput {
-    height: 30px;
-}
-
-#tagArray {
-    height: 30px;
-    display: flex;
-    justify-content: left;
-    color: #3e4042;
-}
-
-#tagArray button {
-    width: 15px;
-    height: 15px;
-    margin-right: 5px;
-    background-color: #dee2e6;
-    color: rgb(73, 80, 87);
-    font-size: 0.8rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-#tagArray p {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    margin-right: 4px;
-    background-color: #dee2e6;
-    padding: 3px 10px;
-    font-size: 0.8rem;
-    border-radius: 3px;
-}
-
-.write-modal-content>div:nth-of-type(4) {
+/* textArea div */
+.write-modal-content>div:nth-of-type(3) {
     height: 100%;
+}
+
+.write-modal-content>div>input {
+    width: 100%;
 }
 
 .write-modal-content>div>textarea {
-    border: #dee2e6 solid 1px;
+    border: gray solid 1px;
     border-radius: 8px;
     width: 100%;
-    padding-left: 10px;
-    padding-top: 10px;
-    resize: none;
     height: 100%;
-}
-
-.write-modal-content>div:nth-of-type(4) {
-    display: flex;
-    justify-content: right;
-    margin-top: 10px;
-
-}
-
-.write-modal-content div button {
-    width: 70px;
-    height: 40px;
-    background-color: white;
-    border: 1px solid #dee2e6;
-
-}
-
-.write-modal-content div button:nth-of-type(2) {
-    width: 70px;
-    height: 40px;
-    margin-left: 10px;
-    background-color: #00c471;
-    color: white;
-    border: none;
 }

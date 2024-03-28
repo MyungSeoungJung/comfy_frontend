@@ -11,18 +11,20 @@ import WriteModal from "./component/writeModal/WriteModal.js";
 function App() {
 
   const navigate = useNavigate();
-  useEffect(() => {
-    const token = getCookie('token');
-    if (!token && window.location.pathname !== '/SignUp') {
-      navigate('/login', { replace: true });
-    }
-  }, [navigate]);
+
+  // useEffect(() => {
+
+  //   const token = getCookie('token');
+  //   if (!token) {
+  //     navigate('/login', { replace: true });
+  //   }
+  // }, [navigate]);
 
   return (
     <div className="App" id="App">
       <Routes>
         <Route path="/Login" element={<Login />} />
-        <Route path="/SignUp" element={<Signup />} />
+        <Route path="/signup" element={<Signup />} />
         <Route path="/" element={<LayOut />}>
           <Route index element={<Home />} />
           <Route key="CreateStudyGruop" path="CreateStudyGruop" element={<CreateStudyGruop />} />
