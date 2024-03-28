@@ -6,37 +6,58 @@ const { kakao } = window;
 function Recommend({ onClose }) {
   const mapRef = useRef(null);
   const [cafes, setCafes] = useState([]);
+  let map = null; // map 변수 정의
+  let infowindow = null; // infowindow 변수 정의
 
   useEffect(() => {
     const container = mapRef.current; // 지도를 담을 영역
-    const options = {
-      center: new kakao.maps.LatLng(37.483812, 126.938711), // 보라매공원
-      level: 4,
+
+    // 사용자의 현재 위치로 지도의 중심을 설정
+    const currentLocation = () => {
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(
+          (position) => {
+            const userPosition = new kakao.maps.LatLng(
+              position.coords.latitude,
+              position.coords.longitude
+            );
+
+            const options = {
+              center: userPosition,
+              level: 4,
+            };
+
+            map = new kakao.maps.Map(container, options); // map 초기화
+            map.setCenter(userPosition);
+
+            // 현재 위치에 빨간색 마커 추가
+            const userMarker = new kakao.maps.Marker({
+              position: userPosition,
+              map: map,
+              image: new kakao.maps.MarkerImage(
+                "http://t1.daumcdn.net/localimg/localimages/07/mapapidoc/marker_red.png", // 빨간색 마커 이미지 URL
+                new kakao.maps.Size(30, 42), // 마커 이미지의 크기
+                {
+                  offset: new kakao.maps.Point(15, 42), // 마커 이미지에서 좌표의 오프셋 설정
+                }
+              ),
+              title: "현재 위치",
+            });
+
+            // 카페 검색 요청
+            searchCafesNearby(userPosition);
+          },
+          (error) => {
+            console.error("Error getting user location:", error);
+          }
+        );
+      } else {
+        console.error("Geolocation is not supported by this browser.");
+      }
     };
 
-    let infowindow = null; // infowindow 변수를 함수 외부에서 정의
-    const map = new kakao.maps.Map(container, options); // 지도 생성 및 객체 리턴
-
-    // 사용자의 현재 위치를 가져와서 지도의 중심으로 설정
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(
-        (position) => {
-          const userPosition = new kakao.maps.LatLng(
-            position.coords.latitude,
-            position.coords.longitude
-          );
-          map.setCenter(userPosition);
-
-          // 카페 검색 요청
-          searchCafesNearby(userPosition);
-        },
-        (error) => {
-          console.error("Error getting user location:", error);
-        }
-      );
-    } else {
-      console.error("Geolocation is not supported by this browser.");
-    }
+    // 사용자의 현재 위치로 지도의 중심을 설정
+    currentLocation();
 
     // 카페 검색을 요청하는 함수
     function searchCafesNearby(userPosition) {
@@ -44,7 +65,7 @@ function Recommend({ onClose }) {
 
       ps.keywordSearch("카페", placesSearchCB, {
         location: userPosition,
-        radius: 1000, // 반경 설정 (미터 단위)
+        radius: 500, // 반경 설정 (미터 단위)
       });
     }
 
@@ -88,7 +109,7 @@ function Recommend({ onClose }) {
 
     return () => {
       // 컴포넌트가 언마운트될 때 지도 정리
-      map && map.relayout();
+      if (map) map.relayout();
     };
   }, []);
 
