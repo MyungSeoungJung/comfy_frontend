@@ -10,6 +10,7 @@ import ChatWidget from "./component/chatbot/ChatWidget.js";
 import CreateStudyGruop from "./component/study/CreateStudyGroup.js";
 import Home from "./component/Home.js";
 import RecoWidget from "./component/reco/RecoWidget.js";
+import StudyDetailPage from "./component/study/studyDetailPage/StudyDetailPage.js";
 
 function App() {
   const navigate = useNavigate();
@@ -28,6 +29,7 @@ function App() {
         <Route path="" element={<LayOut />}>
           <Route index element={<Home />} />
           <Route key="CreateStudyGruop" path="CreateStudyGruop" element={<CreateStudyGruop />} />
+          <Route key="StudyDetailPage" path="study/:id" element={<StudyDetailPage />} />
         </Route>
       </Routes>
 

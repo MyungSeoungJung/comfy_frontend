@@ -6,7 +6,6 @@ import { Link } from "react-router-dom";
 
 function LayOut() {
 
-  // const [modalHandle, setModalHandle] = useState(false)
   return (
     <div >
       <div className="layout">
@@ -48,11 +47,9 @@ function LayOut() {
           {/* navi */}
         </div>
         {/* 컨텐츠 영역 */}
-        <div className="contents">
-          <main style={{ width: "100%", height: "100%", }} className="main">
-            <Outlet />
-          </main>
-        </div>
+        <main className="outlet">
+          <Outlet />
+        </main>
         {/* 컨텐츠 영역 */}
       </div>
 

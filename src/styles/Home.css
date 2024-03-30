@@ -1,11 +1,12 @@
 /* 채팅방 및 메인컨텐츠  */
 .contents {
-    margin-left: 50px;
+    width: 100%;
+    margin-left: 100px;
 }
 
 .contents .main {
     display: flex;
-    justify-content: center;
+    justify-content: left;
     flex-direction: row;
     min-height: 100vh;
     position: relative;

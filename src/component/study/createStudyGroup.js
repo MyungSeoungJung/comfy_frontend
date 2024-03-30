@@ -1,21 +1,13 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import "../../styles/CreateStudyGroup.css"
 import WriteModal from "../writeModal/WriteModal";
 import http from "../../utils/http";
 
-// const study = {
-//     id: null,
-//     title: "",
-//     content: "",
-//     recruitStatus: "",
-//     creatorNickName: "",
-//     creatorId: null,
-//     createdTime: ""
-// };
-
 const CreateStudyGruop = () => {
     const [writeModalHandle, setWriteModalHandle] = useState(false);
     const [study, setStudy] = useState([]);
+    const navigate = useNavigate();
 
     const openWriteModal = () => {
         setWriteModalHandle(true);
@@ -33,15 +25,19 @@ const CreateStudyGruop = () => {
         fetchData();
     }, []);
 
+    const handleStudyClick = (studyId) => {
+        // 클릭된 게시물의 ID를 사용하여 URL을 생성합니다.
+        const url = `/study/${studyId}`;
+        // 생성된 URL로 페이지를 이동합니다.
+        navigate(url); // navigate 함수를 사용하여 페이지를 이동합니다.
+    };
 
     return (
-        <>
-
-            {/* 메인 */}
+        <div className="create-study-wrapper">
+            <div className="create-study-banner">sd</div>
             <div className="create-study-body">
                 {/* 검색 상단 */}
                 <div className="create-study-center">
-                    <div className="create-study-banner">sd</div>
                     <div className="create-study-contain">
                         <div className="create-study-state">
                             <button>전체</button>
@@ -69,7 +65,8 @@ const CreateStudyGruop = () => {
                                 {/* 게시글*/}
                                 {study.map((study, idx) => (
                                     <div id="stduy-content-contain"
-                                        key={"study-id-" + study.id + "," + idx}>
+                                        key={"study-id-" + study.id + "," + idx}
+                                        onClick={() => handleStudyClick(study.id)}>
                                         <div id="study-content-top">
                                             <span>{study.recruitStatus}</span> <h3>{study.title}</h3>
                                         </div>
@@ -81,18 +78,6 @@ const CreateStudyGruop = () => {
                                         </div>
                                     </div>
                                 ))}
-                                {/* <div id="stduy-content-contain">
-                                <div id="study-content-top">
-                                    <span>모집중</span> <h3>제목</h3>
-                                </div>
-
-                                <div id="study-content-middle">내용</div>
-                                <div id="study-content-bottom">
-                                    <div><span>닉네임</span><span>작성</span></div>
-                                    <div><span>좋아요</span><span>댓글</span></div>
-                                </div>
-                            </div> */}
-
                             </div>
                             {/* 컨텐츠 영역*/}
 
@@ -108,8 +93,8 @@ const CreateStudyGruop = () => {
                 {/* side 인기태그 */}
                 {writeModalHandle && <WriteModal isOpen={openWriteModal} onClose={closeWriteModal} />}
             </div>
-            {/* 메인 */}
-        </>
+        </div>
+
     );
 }
 
