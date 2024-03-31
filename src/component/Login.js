@@ -20,7 +20,7 @@ function Login() {
       </div>
       <div className="login_form">
         {/*  */}
-        <form action="http://192.168.0.23:8080/auth/signIn" method="post">
+        <form action="http://172.16.1.31:8080/auth/signIn" method="post">
           <div className="login_input">
             <input
               name="email"

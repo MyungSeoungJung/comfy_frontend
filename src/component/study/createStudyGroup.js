@@ -26,10 +26,10 @@ const CreateStudyGruop = () => {
     }, []);
 
     const handleStudyClick = (studyId) => {
-        // 클릭된 게시물의 ID를 사용하여 URL을 생성합니다.
-        const url = `/study/${studyId}`;
-        // 생성된 URL로 페이지를 이동합니다.
-        navigate(url); // navigate 함수를 사용하여 페이지를 이동합니다.
+        // 클릭된 게시물의 ID를 사용하여 URL을 생성
+        const url = `/study/studyDetailPage?id=${studyId}`;
+        // 생성된 URL로 페이지를 이동
+        navigate(url);
     };
 
     return (
