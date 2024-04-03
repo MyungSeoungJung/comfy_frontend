@@ -51,8 +51,8 @@
 
 .studyDetail-side {
     width: 40%;
-    height: 95vh;
-    padding: 40px;
+    height: 90vh;
+    padding-left: 40px;
     position: sticky;
     top: 0;
 }
@@ -81,6 +81,16 @@
     padding: 24px;
 }
 
+.comment-content {
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 30px;
+}
+
+.comment-content>h2 {
+    margin-right: 10px;
+}
+
 .studyDetail-comment-heart {
     height: 20%;
     border-top: 1px solid #e9ecef;
@@ -95,6 +105,14 @@
 .studyDetail-comment-write {
     height: 10%;
     padding: 10px;
+    display: flex;
+    flex-direction: row;
+}
+
+.studyDetail-comment-write>button {
+    background-color: white;
+    width: 20%;
+    font-weight: 800;
 }
 
 .similar-study {

@@ -34,7 +34,10 @@ const CreateStudyGruop = () => {
 
     return (
         <div className="create-study-wrapper">
-            <div className="create-study-banner">sd</div>
+            <div className="create-study-banner">
+                <h1>지식을 나누고 함께 성장하는 공간을 만들어보세요! </h1>
+                <p>스터디를 만들고 함께 성장하는 커뮤니티에 참여해 보세요.</p>
+            </div>
             <div className="create-study-body">
                 {/* 검색 상단 */}
                 <div className="create-study-center">

@@ -1,4 +1,3 @@
-import React, { useState } from "react";
 import { SiSpeedtest } from "react-icons/si";
 import "../styles/LayOut.css";
 import { Outlet } from "react-router";
@@ -34,12 +33,12 @@ function LayOut() {
                 <li className="room">
                   {" "}
                   <SiSpeedtest />
-                  <a href=""> 스터디 리스트 </a>{" "}
+                  <a href=""> 채팅 </a>{" "}
                 </li>
                 <li className="info">
                   {" "}
                   <SiSpeedtest />
-                  <a href=""> 나의 프로필 </a>
+                  <Link to="MyPage">마이 페이지 </Link>
                 </li>
               </ul>
             </div>

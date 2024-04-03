@@ -11,8 +11,6 @@ button {
     width: 100%;
     display: flex;
     flex-direction: row;
-
-
 }
 
 /* 가운데 검색 & main 컨테이너 */
@@ -31,6 +29,12 @@ button {
     margin-bottom: 30px;
     margin-top: 30px;
     border-radius: 3px;
+    padding: 20px;
+}
+
+.create-study-banner>h1 {
+    font-size: 1.2rem;
+    margin-bottom: 6px;
 }
 
 .create-study-contain {
