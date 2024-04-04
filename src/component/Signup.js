@@ -1,36 +1,58 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import { Link } from "react-router-dom";
-import axios from "axios"; // axios 임포트
+import axios from "axios";
 import "../styles/Login.css";
+// 기본 이미지 URL
+const defaultImageUrl = "/assets/simple_profile_img.png";
 
 function Signup() {
-  // 필드 초기값 설정
   const [email, setEmail] = useState("");
   const [nickname, setNickname] = useState("");
   const [password, setPassword] = useState("");
   const [passwordCheck, setPasswordCheck] = useState("");
-
+  const fileRef = useRef();
+  const [imgPreView, setImgPreView] = useState([]);
   const baseURL = process.env.REACT_APP_BASE_URL;
 
   const handleSubmit = async (e) => {
-    e.preventDefault(); // 기본 제출 이벤트 방지c
+    e.preventDefault();
 
-    // 입력한 정보를 가공하여 데이터 객체로 만듭니다.
+    // 이미지를 등록하지 않았을 경우 기본 이미지 URL을 사용하고, 등록했을 경우에는 업로드한 이미지 URL을 사용합니다.
+    const imageUrlToSend = imgPreView.length > 0 ? imgPreView[0] : defaultImageUrl;
+
     const data = {
       email: email,
       nickName: nickname,
       password: password,
+      profileImage: imageUrlToSend,
     };
 
     try {
-      // 가입 요청을 보냅니다.
       const response = await axios.post(`${baseURL}auth/signUp`, data);
-
-      // 가입이 성공하면 로그인 페이지로 이동
+      console.log(response);
       window.location.href = "/Login";
     } catch (error) {
-      // 가입 실패 시 에러 처리 코드
       console.error("가입 실패:", error);
+    }
+  };
+
+  const handleImgPreview = (event) => {
+    const files = event.target.files;
+    const previews = [];
+
+    for (let i = 0; i < files.length; i++) {
+      const file = files[i];
+      const reader = new FileReader();
+
+      reader.onload = (e) => {
+        previews.push(e.target.result);
+
+        if (previews.length === files.length) {
+          setImgPreView(previews);
+        }
+      };
+
+      reader.readAsDataURL(file);
     }
   };
 
@@ -52,6 +74,30 @@ function Signup() {
       <div className="signup_form">
         <form onSubmit={handleSubmit}>
           <div className="signup_input">
+            <div className="profile-img">
+              {imgPreView.length > 0 ? (
+                imgPreView.map((preview, index) => (
+                  <img key={index} src={preview} id="preview-img" />
+                ))
+              ) : (
+                <img src={defaultImageUrl} id="preview-img" style={{ width: '100px', height: '100px' }} />
+              )}
+
+              <div>
+                <label htmlFor="file">
+                  <div className="profile-change">변경</div>
+                  <input
+                    type="file"
+                    multiple
+                    accept="image/*, video/*"
+                    ref={fileRef}
+                    onChange={handleImgPreview}
+                    id="file"
+                  />
+                </label>
+                <p>확장자: png, jpg, jpeg / 용량: 1MB 이하</p>
+              </div>
+            </div>
             <div className="input_email">
               <input
                 type="text"
@@ -60,8 +106,7 @@ function Signup() {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
               />
-              {/* 이메일 인증 버튼 추가 */}
-              <button className="email_verify"> 인증하기 </button>
+              <button type="button" className="email_verify"> 인증하기 </button>
             </div>
           </div>
           <div className="signup_input">

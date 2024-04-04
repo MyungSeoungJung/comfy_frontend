@@ -13,6 +13,8 @@ const StudyDetailPage = () => {
     const [totalHearts, setTotalHearts] = useState(0);
     const commentRef = useRef();
     const [studyComment, setStudyComment] = useState([]);
+    const [img, setImg] = useState([]);
+
     const handleHeartClick = async () => {
         const id = window.location.search;
         try {
@@ -50,6 +52,9 @@ const StudyDetailPage = () => {
             const commentResponse = await http.get(`studyComment/getComment${id}`);
             setStudyComment(commentResponse.data);
 
+            const imgResponse = await http.get(`user/getUserImg`);
+            setImg(imgResponse.data.userImg);
+
         }
         fetchData();
     }, []);
@@ -61,8 +66,29 @@ const StudyDetailPage = () => {
             content: commentRef.current.value,
         }
         const response = await http.post(`studyComment/addComment${id}`, data);
+
         console.log(response);
     }
+
+    const handleImgPreview = (event) => {
+        const files = event.target.files;
+        const previews = [];
+
+        for (let i = 0; i < files.length; i++) {
+            const file = files[i];
+            const reader = new FileReader();
+
+            reader.onload = (e) => {
+                previews.push(e.target.result);
+
+                if (previews.length === files.length) {
+                    setImg(previews);
+                }
+            };
+
+            reader.readAsDataURL(file);
+        }
+    };
 
     return (
         <>
@@ -92,15 +118,17 @@ const StudyDetailPage = () => {
                             <p> 작성한 스터디</p>
                         </div>
                         <div className="wrtier-img">
-                            img
+                            <img src={img} alt="" />
                         </div>
                     </div>
                     <div className="studyDetail-comment">
                         <div className="studyDetail-comment-view">
                             {studyComment.map((studyComment, idx) => (
                                 <div className="comment-content">
-                                    <h2>{studyComment.nickName}</h2>  <p>{studyComment.content}</p>
+                                    <img src={img} id="comment-profile-img" />
+                                    <div><h2>{studyComment.userNickName}</h2>  <p>{studyComment.content}</p></div>
                                 </div>
+
                             )
                             )}
 

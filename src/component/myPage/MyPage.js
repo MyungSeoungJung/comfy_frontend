@@ -1,5 +1,39 @@
+import React, { useEffect, useState } from "react";
 import "../../styles/MyPage.css"
+import http from "../../utils/http"
+
 const MyPage = () => {
+    const [imgPreView, setImgPreView] = useState([]);
+
+    useEffect(() => {
+
+        const fetchData = async () => {
+            const response = await http.get(`user/getUserImg`);
+
+            setImgPreView(response.data.userImg);
+        }
+        fetchData();
+    }, []);
+
+    const handleImgPreview = (event) => {
+        const files = event.target.files;
+        const previews = [];
+
+        for (let i = 0; i < files.length; i++) {
+            const file = files[i];
+            const reader = new FileReader();
+
+            reader.onload = (e) => {
+                previews.push(e.target.result);
+
+                if (previews.length === files.length) {
+                    setImgPreView(previews);
+                }
+            };
+
+            reader.readAsDataURL(file);
+        }
+    };
 
     return (
         <>
@@ -12,11 +46,17 @@ const MyPage = () => {
                     <div className="myPage-profile-img-contain">
                         <h1>프로필 이미지</h1>
                         <div className="profile-img">
-                            <img src="" alt="" id="preview-img" />
+                            <img src={imgPreView} id="preview-img" />
                             <div>
                                 <label htmlFor="file">
                                     <div className="profile-change">변경</div>
-                                    <input type="file" name="file" id="file" />
+                                    <input
+                                        type="file"
+                                        multiple
+                                        accept="image/*, video/*"
+                                        onChange={handleImgPreview}
+                                        id="file"
+                                    />
                                 </label>
                                 <p>확장자: png, jpg, jpeg / 용량: 1MB 이하 </p>
                             </div>
