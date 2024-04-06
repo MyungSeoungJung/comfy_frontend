@@ -15,10 +15,17 @@ import MyPage from "./component/myPage/MyPage.js";
 
 function App() {
   const navigate = useNavigate();
+
   useEffect(() => {
     const token = getCookie('token');
     if (!token && window.location.pathname !== '/SignUp') {
       navigate('/login', { replace: true });
+    } else if (token) {
+      const decodedToken = token;
+      const currentTime = Date.now() / 1000; // 현재 시간(밀리초 단위)을 초 단위로 변환
+      if (decodedToken.exp < currentTime) { // 만료 시간과 현재 시간을 비교하여 토큰이 만료되었는지 확인
+        navigate('/login', { replace: true }); // 토큰이 만료되었으면 리다이렉션
+      }
     }
   }, [navigate]);
 

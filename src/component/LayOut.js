@@ -51,7 +51,6 @@ function LayOut() {
         </main>
         {/* 컨텐츠 영역 */}
       </div>
-
     </div>
   );
 }

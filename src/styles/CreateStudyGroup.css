@@ -175,7 +175,7 @@ button {
 
 #study-content-middle {
     margin-bottom: 16px;
-    margin-top: 6px;
+    margin-top: 12px;
 }
 
 #study-content-bottom {
@@ -194,4 +194,36 @@ button {
 
 #study-content-bottom>div>span:nth-child(1) {
     margin-right: 12px;
+}
+
+.study-content-tag {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+
+.study-content-tag>button:nth-of-type(1) {
+    margin-left: 0px;
+    background-color: #eff3fa;
+    display: inline-block;
+    line-height: 1.38;
+    padding: 5px 12px;
+    height: 30px;
+    color: #3e4042;
+    margin-bottom: 15px;
+    border-radius: 3px;
+}
+
+.study-content-tag>button {
+    margin-left: 5px;
+    background-color: #eff3fa;
+    display: inline-block;
+    text-align: center;
+    padding: 5px 12px;
+    height: 30px;
+    color: #3e4042;
+    margin-bottom: 15px;
+    border-radius: 3px;
+
 }

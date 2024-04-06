@@ -8,7 +8,7 @@ const MyPage = () => {
     useEffect(() => {
 
         const fetchData = async () => {
-            const response = await http.get(`user/getUserImg`);
+            const response = await http.get(`user/getUserInfo`);
 
             setImgPreView(response.data.userImg);
         }

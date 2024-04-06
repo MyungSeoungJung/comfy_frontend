@@ -13,7 +13,7 @@ const StudyDetailPage = () => {
     const [totalHearts, setTotalHearts] = useState(0);
     const commentRef = useRef();
     const [studyComment, setStudyComment] = useState([]);
-    const [img, setImg] = useState([]);
+    const [userInfo, setUserInfo] = useState({ userImg: "", userNickName: "" });
 
     const handleHeartClick = async () => {
         const id = window.location.search;
@@ -43,22 +43,31 @@ const StudyDetailPage = () => {
     };
     useEffect(() => {
         const fetchData = async () => {
-            const id = window.location.search;
-            const response = await http.get(`study/studyDetailPage${id}`);
-            setStudy(response.data)
-            setTotalHearts(response.data.totalHearts);
-            setHeartFilled(response.data.userLikedStudy)
+            try {
+                const id = window.location.search;
 
-            const commentResponse = await http.get(`studyComment/getComment${id}`);
-            setStudyComment(commentResponse.data);
+                // 스터디 정보 가져오기
+                const studyResponse = await http.get(`study/studyDetailPage${id}`);
+                setStudy(studyResponse.data);
+                setTotalHearts(studyResponse.data.totalHearts);
+                setHeartFilled(studyResponse.data.userLikedStudy);
 
-            const imgResponse = await http.get(`user/getUserImg`);
-            setImg(imgResponse.data.userImg);
+                // 댓글 가져오기
+                const commentResponse = await http.get(`studyComment/getComment${id}`);
+                setStudyComment(commentResponse.data);
 
-        }
+                // 사용자 정보 가져오기
+                const imgResponse = await http.get(`user/getUserInfo`);
+                setUserInfo({ userImg: imgResponse.data.userImg, userNickName: imgResponse.data.userNickName });
+
+            } catch (error) {
+                console.error("Error fetching data:", error);
+                // 에러 처리
+            }
+        };
+
         fetchData();
     }, []);
-
     const addComment = async (e) => {
         e.preventDefault();
         const id = window.location.search;
@@ -67,80 +76,97 @@ const StudyDetailPage = () => {
         }
         const response = await http.post(`studyComment/addComment${id}`, data);
 
+        const newComment = {
+            userNickName: userInfo.userNickName,
+            content: commentRef.current.value,
+            userImg: userInfo.userImg,
+        };
+        setStudyComment([...studyComment, newComment]);
+        commentRef.current.value = "";
         console.log(response);
     }
 
-    const handleImgPreview = (event) => {
-        const files = event.target.files;
-        const previews = [];
+    // const handleImgPreview = (event) => {
+    //     const files = event.target.files;
+    //     const previews = [];
 
-        for (let i = 0; i < files.length; i++) {
-            const file = files[i];
-            const reader = new FileReader();
+    //     for (let i = 0; i < files.length; i++) {
+    //         const file = files[i];
+    //         const reader = new FileReader();
 
-            reader.onload = (e) => {
-                previews.push(e.target.result);
+    //         reader.onload = (e) => {
+    //             previews.push(e.target.result);
 
-                if (previews.length === files.length) {
-                    setImg(previews);
-                }
-            };
+    //             if (previews.length === files.length) {
+    //                 setUserInfo(previews);
+    //             }
+    //         };
 
-            reader.readAsDataURL(file);
-        }
-    };
+    //         reader.readAsDataURL(file);
+    //     }
+    // };
 
     return (
         <>
             <div className="studyDetail-warpper">
-                <div className="studyDetail-contain">
-                    <div className="studyDetail-top" >
-                        <h1> {study.title}</h1>
-                        <p>{formatCreateTime(study.createdTime)} 작성</p>
-                    </div>
-                    <div className="study-item-horizontal"></div>
-                    <div className="studyDetail-content" >
-                        <p>
-                            {study.content}
-                        </p>
-                    </div>
-                    <div className="study-item-horizontal"></div>
-
-                    <div className="similar-study" >
-                        <ul>
-                            <li> 비슷한 컨텐츠 </li>
-                        </ul>
-                    </div>
+                <div className="create-study-banner">
+                    <h1>지식을 나누고 함께 성장하는 공간을 만들어보세요! </h1>
+                    <p>스터디를 만들고 함께 성장하는 커뮤니티에 참여해 보세요.</p>
                 </div>
-                <div className="studyDetail-side">
-                    <div className="study-writerInfo">
-                        <div> <h1> {study.creatorNickName} </h1>
-                            <p> 작성한 스터디</p>
+                <div className="studyDetail-content-wrapper">
+                    <div className="studyDetail-contain">
+                        <div className="studyDetail-top" >
+                            <h1> {study.title}</h1>
+                            <p>{formatCreateTime(study.createdTime)} 작성</p>
                         </div>
-                        <div className="wrtier-img">
-                            <img src={img} alt="" />
+                        <div className="study-item-horizontal"></div>
+                        <div className="studyDetail-content" >
+                            <p>
+                                {study.content}
+                            </p>
+                        </div>
+                        <div className="study-detail-tag">태그 </div>
+                        <div className="study-item-horizontal"></div>
+
+                        <div className="similar-study" >
+                            <ul>
+                                <li> 비슷한 컨텐츠 </li>
+                            </ul>
                         </div>
                     </div>
-                    <div className="studyDetail-comment">
-                        <div className="studyDetail-comment-view">
-                            {studyComment.map((studyComment, idx) => (
-                                <div className="comment-content">
-                                    <img src={img} id="comment-profile-img" />
-                                    <div><h2>{studyComment.userNickName}</h2>  <p>{studyComment.content}</p></div>
+                    <div className="studyDetail-side">
+                        <div className="study-writerInfo">
+                            <div> <h1> {study.creatorNickName} </h1>
+                                <p> 작성한 스터디</p>
+                            </div>
+                            <div className="wrtier-img">
+                                <img src={userInfo.userImg} alt="" />
+                            </div>
+                        </div>
+                        {/* 댓글 영역 */}
+                        <div className="studyDetail-comment">
+                            <div className="studyDetail-comment-view">
+                                {studyComment.map((studyComment, idx) => (
+                                    <div className="comment-content">
+                                        <img src={userInfo.userImg} id="comment-profile-img" />
+                                        <div><h2>{studyComment.userNickName}</h2>  <p>{studyComment.content}</p></div>
+                                    </div>
+
+                                )
+                                )}
+
+                            </div>
+                            <div className="studyDetail-comment-heart">
+                                <div>{heartFilled ? <IoHeartSharp className="fill-heart" onClick={handleHeartClick} /> : <IoHeartOutline className="empty-heart" onClick={handleHeartClick} />}
+                                    <IoChatbubbleOutline className="chat-icon" />
+                                    <span id="recruit-status"> 모집중 </span>
                                 </div>
-
-                            )
-                            )}
-
-                        </div>
-                        <div className="studyDetail-comment-heart" onClick={handleHeartClick}>
-                            {heartFilled ? <IoHeartSharp className="fill-heart" /> : <IoHeartOutline className="empty-heart" />}
-                            <IoChatbubbleOutline className="chat-icon" />
-                            <div className="studyDetail-totalHeart">{totalHearts} Like</div>
-                        </div>
-                        <div className="studyDetail-comment-write">
-                            <input ref={commentRef} type="text" placeholder="add comment" />
-                            <button onClick={addComment}>전송</button>
+                                <div className="studyDetail-totalHeart">{totalHearts} Like</div>
+                            </div>
+                            <div className="studyDetail-comment-write">
+                                <input ref={commentRef} type="text" placeholder="add comment" />
+                                <button onClick={addComment}>전송</button>
+                            </div>
                         </div>
                     </div>
                 </div>

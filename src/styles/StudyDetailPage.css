@@ -2,10 +2,15 @@
     width: 70%;
     min-height: 90%;
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     margin-left: 100px;
-    margin-top: 30px;
+    margin-top: 0px;
     margin-bottom: 50px;
+}
+
+.studyDetail-content-wrapper {
+    display: flex;
+    flex-direction: row;
 }
 
 .studyDetail-contain {
@@ -43,7 +48,7 @@
 
 .studyDetail-content {
     display: flex;
-    min-height: 500px;
+    min-height: 480px;
     padding: 40px;
     padding-top: 24px;
 }
@@ -64,7 +69,7 @@
     padding: 30px;
     border: 1px solid #e9ecef;
     box-shadow: 0 1px 3px rgba(0, 0, 0, .05), 0 10px 15px -5px rgba(0, 0, 0, .05), 0 7px 7px -5px rgba(0, 0, 0, .04);
-    margin-bottom: 16px;
+    margin-bottom: 14px;
     border-radius: 12px;
     justify-content: space-between;
 }
@@ -82,16 +87,17 @@
 }
 
 .studyDetail-comment {
-    height: 85%;
+    height: 80%;
     display: flex;
     flex-direction: column;
-    margin-top: 15px;
+    margin-top: 10px;
     border: 1px solid #e9ecef;
 }
 
 .studyDetail-comment-view {
     height: 70%;
     padding: 24px;
+    overflow-y: auto;
 }
 
 .comment-content {
@@ -109,6 +115,7 @@
 
 .comment-content>div>h2 {
     margin-right: 8px;
+
 }
 
 .studyDetail-comment-heart {
@@ -116,6 +123,11 @@
     border-top: 1px solid #e9ecef;
     border-bottom: 1px solid #e9ecef;
     padding: 12px;
+}
+
+.studyDetail-comment-heart>div:nth-of-type(1) {
+    display: flex;
+    flex-direction: row;
 }
 
 .studyDetail-totalHeart {
@@ -172,4 +184,14 @@
     width: 40px;
     height: 40px;
     border-radius: 50%;
+}
+
+
+#recruit-status {
+    background-color: gray;
+    padding: 5px;
+    margin-left: 10px;
+    border-radius: 5px;
+    background-color: #00c471;
+    color: #fff;
 }

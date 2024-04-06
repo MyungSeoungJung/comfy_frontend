@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { IoIosHeartEmpty } from "react-icons/io";
 import "../../styles/CreateStudyGroup.css"
 import WriteModal from "../writeModal/WriteModal";
 import http from "../../utils/http";
@@ -31,7 +32,16 @@ const CreateStudyGruop = () => {
         // 생성된 URL로 페이지를 이동
         navigate(url);
     };
+    //  시간
+    const formatCreateTime = (createTime) => {
+        if (!createTime) return ""; // 빈 값인 경우 빈 문자열 반환
+        const date = new Date(createTime[0], createTime[1] - 1, createTime[2], createTime[3], createTime[4], createTime[5], createTime[6] / 1000000);
+        const day = date.getDate().toString().padStart(2, '0');
+        const month = (date.getMonth() + 1).toString().padStart(2, '0');
+        const year = date.getFullYear().toString().slice(2);
 
+        return `${year}.${month}.${day}`;
+    };
     return (
         <div className="create-study-wrapper">
             <div className="create-study-banner">
@@ -58,7 +68,7 @@ const CreateStudyGruop = () => {
                         {/* 게시글 컨테이너 영역 */}
                         <div className="create-study-content">
                             <div className="create-study-content-top">
-                                <div><button>최신순</button><button>최신순</button></div>
+                                <div><button>최신순</button></div>
                                 <div> <button onClick={openWriteModal}>글쓰기</button></div>
                             </div>
 
@@ -75,9 +85,15 @@ const CreateStudyGruop = () => {
                                         </div>
 
                                         <div id="study-content-middle">{study.content}</div>
+                                        <div className="study-content-tag">
+                                            {study.tagNames.map((tagName) => (
+                                                <button><span>{tagName}</span></button>
+                                            ))}
+                                        </div>
+
                                         <div id="study-content-bottom">
-                                            <div><span>{study.creatorNickName}</span> <span>{study.createdTime}</span></div>
-                                            <div><span>좋아요</span> <span>{study.totalComment}</span></div>
+                                            <div><span>{study.creatorNickName}</span> <span>{formatCreateTime(study.createdTime)}</span></div>
+                                            <div><IoIosHeartEmpty /><span>{study.totalHeart}</span> <span>{study.totalComment}</span></div>
                                         </div>
                                     </div>
                                 ))}
