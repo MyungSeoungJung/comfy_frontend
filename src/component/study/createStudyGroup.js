@@ -117,8 +117,8 @@ const CreateStudyGruop = () => {
                             <button><span>{hashTag}</span></button>
                         ))}</div>
                     </div>
-                    <div className="popular-post-contain">
-                        <div><h2>주간 인기글</h2></div>
+                    <div className="popular-study-contain">
+                        <div><h2>모집중인 인기 글</h2></div>
                         <div></div>
                     </div>
                 </aside>
