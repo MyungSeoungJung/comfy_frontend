@@ -125,7 +125,11 @@ const StudyDetailPage = () => {
                                 {study.content}
                             </p>
                         </div>
-                        <div className="study-detail-tag">태그 </div>
+                        <div className="study-detail-tag">
+                            {study.hashTags && study.hashTags.map((hashTag) => (
+                                <button><span>{hashTag}</span></button>
+                            ))}
+                        </div>
                         <div className="study-item-horizontal"></div>
 
                         <div className="similar-study" >

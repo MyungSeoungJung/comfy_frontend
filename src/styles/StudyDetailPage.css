@@ -195,3 +195,16 @@
     background-color: #00c471;
     color: #fff;
 }
+
+.study-detail-tag {
+    padding: 24px;
+}
+
+.study-detail-tag>button {
+    margin-right: 12px;
+    background-color: #eff3fa;
+    padding: 5px 12px;
+    height: 30px;
+    border-radius: 3px;
+
+}

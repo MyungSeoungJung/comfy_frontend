@@ -4,10 +4,11 @@ import { IoIosHeartEmpty } from "react-icons/io";
 import "../../styles/CreateStudyGroup.css"
 import WriteModal from "../writeModal/WriteModal";
 import http from "../../utils/http";
-
+import { LuRefreshCw } from "react-icons/lu";
 const CreateStudyGruop = () => {
     const [writeModalHandle, setWriteModalHandle] = useState(false);
     const [study, setStudy] = useState([]);
+    const [PopularHashTag, setPopularHashTag] = useState([]);
     const navigate = useNavigate();
 
     const openWriteModal = () => {
@@ -22,6 +23,9 @@ const CreateStudyGruop = () => {
         const fetchData = async () => {
             const response = await http.get("study/getStudy");
             setStudy(response.data)
+
+            const PopularHashTagResponse = await http.get("hashTag/PopularHashTag")
+            setPopularHashTag(PopularHashTagResponse.data);
         };
         fetchData();
     }, []);
@@ -61,7 +65,7 @@ const CreateStudyGruop = () => {
                         {/* 검색창 */}
                         <div className="create-study-search">
                             <div><input type="text" placeholder="스터디를 검색하세요" /> <button>검색</button></div>
-                            <div> <input type="text" placeholder="태그로 검색하세요" /> <button>초기화</button> </div>
+                            <div> <input type="text" placeholder="태그로 검색하세요" /><button> <LuRefreshCw />  초기화</button> </div>
                         </div>
                         {/* 검색창 */}
 
@@ -81,7 +85,7 @@ const CreateStudyGruop = () => {
                                         key={"study-id-" + study.id + "," + idx}
                                         onClick={() => handleStudyClick(study.id)}>
                                         <div id="study-content-top">
-                                            <span>{study.recruitStatus}</span> <h3>{study.title}</h3>
+                                            <span id="study-recruit-status">{study.recruitStatus}</span> <h3>{study.title}</h3>
                                         </div>
 
                                         <div id="study-content-middle">{study.content}</div>
@@ -107,7 +111,16 @@ const CreateStudyGruop = () => {
                 </div>
                 {/* side 인기태그 */}
                 <aside className="create-study-side">
-                    <p>인기 태그</p>
+                    <div className="PopularHashTag-contain">
+                        <div><h2>인기 태그</h2></div>
+                        <div>{PopularHashTag.map((hashTag) => (
+                            <button><span>{hashTag}</span></button>
+                        ))}</div>
+                    </div>
+                    <div className="popular-post-contain">
+                        <div><h2>주간 인기글</h2></div>
+                        <div></div>
+                    </div>
                 </aside>
                 {/* side 인기태그 */}
                 {writeModalHandle && <WriteModal isOpen={openWriteModal} onClose={closeWriteModal} />}

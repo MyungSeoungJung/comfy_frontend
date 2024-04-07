@@ -1,4 +1,5 @@
 import { useRef, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import "../../styles/WriteModal.css";
 import http from "../../utils/http";
 
@@ -6,6 +7,8 @@ const WriteModal = ({ onClose }) => {
     const titleRef = useRef();
     const contentRef = useRef();
     const [tags, setTags] = useState([]);
+    const navigate = useNavigate();
+
 
     const addTag = (tag) => {
         if (!tags.includes(tag)) {
@@ -40,6 +43,11 @@ const WriteModal = ({ onClose }) => {
             tagNames: tags.length > 0 ? tags : [],
         }
         const response = await http.post("study/addStudy", data);
+
+        console.log("생성된 스터디 ID" + response.data);
+        const url = `/study/studyDetailPage?id=${response.data}`;
+        // 생성된 URL로 페이지를 이동
+        navigate(url);
     }
 
 
