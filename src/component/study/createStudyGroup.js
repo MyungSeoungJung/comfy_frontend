@@ -9,6 +9,7 @@ const CreateStudyGruop = () => {
     const [writeModalHandle, setWriteModalHandle] = useState(false);
     const [study, setStudy] = useState([]);
     const [PopularHashTag, setPopularHashTag] = useState([]);
+    const [PopularStudy, setPopularStudy] = useState([]);
     const navigate = useNavigate();
 
     const openWriteModal = () => {
@@ -26,6 +27,9 @@ const CreateStudyGruop = () => {
 
             const PopularHashTagResponse = await http.get("hashTag/PopularHashTag")
             setPopularHashTag(PopularHashTagResponse.data);
+
+            const PopularStudyResponse = await http.get("study/popularStudy")
+            setPopularStudy(PopularStudyResponse.data);
         };
         fetchData();
     }, []);
@@ -119,7 +123,17 @@ const CreateStudyGruop = () => {
                     </div>
                     <div className="popular-study-contain">
                         <div><h2>모집중인 인기 글</h2></div>
-                        <div></div>
+                        {PopularStudy.map((study) => (
+                            <div>
+                                <span>{study.title} </span>
+                                <div>
+                                    <div>  <img src={study.userImg} alt="" /></div>
+                                    <p>{study.userNickName}</p>
+                                </div>
+                            </div>
+
+
+                        ))}
                     </div>
                 </aside>
                 {/* side 인기태그 */}
