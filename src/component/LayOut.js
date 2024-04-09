@@ -33,7 +33,7 @@ function LayOut() {
                 <li className="room">
                   {" "}
                   <SiSpeedtest />
-                  <Link to="TabComponent">탭 컴포넌트  </Link>
+                  <Link to="TabComponent">채팅</Link>
                 </li>
                 <li className="info">
                   {" "}
