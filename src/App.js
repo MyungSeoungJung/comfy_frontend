@@ -12,6 +12,7 @@ import Home from "./component/Home.js";
 import RecoWidget from "./component/reco/RecoWidget.js";
 import StudyDetailPage from "./component/study/studyDetailPage/StudyDetailPage.js";
 import MyPage from "./component/myPage/MyPage.js";
+import TabComponent from "./component/tabComponent/TabComponent.js";
 
 function App() {
   const navigate = useNavigate();
@@ -39,6 +40,7 @@ function App() {
           <Route key="CreateStudyGruop" path="CreateStudyGruop" element={<CreateStudyGruop />} />
           <Route key="StudyDetailPage" path="study/:id" element={<StudyDetailPage />} />
           <Route key="MyPage" path="MyPage" element={<MyPage />} />
+          <Route key="TabComponent" path="TabComponent" element={<TabComponent />} />
         </Route>
       </Routes>
 

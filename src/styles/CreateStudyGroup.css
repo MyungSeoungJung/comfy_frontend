@@ -48,13 +48,14 @@ button {
 .create-study-state {
     display: flex;
     flex-direction: row;
+    width: 100%;
     margin-bottom: 20px;
 }
 
-.create-study-state>button {
+/* .create-study-state>button {
     margin-right: 12px;
     background-color: white;
-}
+} */
 
 
 /*  오른쪽 인기태그 */

@@ -5,11 +5,15 @@ import "../../styles/CreateStudyGroup.css"
 import WriteModal from "../writeModal/WriteModal";
 import http from "../../utils/http";
 import { LuRefreshCw } from "react-icons/lu";
+import TabComponent from "../tabComponent/TabComponent";
+
 const CreateStudyGruop = () => {
     const [writeModalHandle, setWriteModalHandle] = useState(false);
     const [study, setStudy] = useState([]);
     const [PopularHashTag, setPopularHashTag] = useState([]);
     const [PopularStudy, setPopularStudy] = useState([]);
+
+
     const navigate = useNavigate();
 
     const openWriteModal = () => {
@@ -61,9 +65,7 @@ const CreateStudyGruop = () => {
                 <div className="create-study-center">
                     <div className="create-study-contain">
                         <div className="create-study-state">
-                            <button>전체</button>
-                            <button>모집중</button>
-                            <button>모집 완료</button>
+                            <TabComponent />
                         </div>
 
                         {/* 검색창 */}
