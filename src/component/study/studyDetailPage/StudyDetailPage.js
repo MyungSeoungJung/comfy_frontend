@@ -4,10 +4,12 @@ import { IoHeartSharp } from "react-icons/io5";
 import { IoChatbubbleOutline } from "react-icons/io5";
 import React, { useEffect, useState } from "react";
 import { useRef } from "react";
+import { useNavigate } from "react-router-dom";
 
 import http from "../../../utils/http";
 
 const StudyDetailPage = () => {
+    const navigate = useNavigate();
     const [heartFilled, setHeartFilled] = useState(false);
     const [study, setStudy] = useState({});
     const [totalHearts, setTotalHearts] = useState(0);
@@ -31,6 +33,10 @@ const StudyDetailPage = () => {
             console.error("Error:", error);
         }
     };
+    // 채팅 이동
+    const handleChat = () => {
+        navigate(`/ChatModal?toUserId=${study.writerId}`);
+    }
 
     const formatCreateTime = (createTime) => {
         if (!createTime) return ""; // 빈 값인 경우 빈 문자열 반환
@@ -144,7 +150,7 @@ const StudyDetailPage = () => {
                                 <p> 작성한 스터디</p>
                             </div>
                             <div className="wrtier-img">
-                                <img src={userInfo.userImg} alt="" />
+                                <img src={study.writerImg} alt="" />
                             </div>
                         </div>
                         {/* 댓글 영역 */}
@@ -162,7 +168,7 @@ const StudyDetailPage = () => {
                             </div>
                             <div className="studyDetail-comment-heart">
                                 <div>{heartFilled ? <IoHeartSharp className="fill-heart" onClick={handleHeartClick} /> : <IoHeartOutline className="empty-heart" onClick={handleHeartClick} />}
-                                    <IoChatbubbleOutline className="chat-icon" />
+                                    <IoChatbubbleOutline className="chat-icon" writerId={study.writerId} onClick={handleChat} />
                                     <span id="recruit-status"> 모집중 </span>
                                 </div>
                                 <div className="studyDetail-totalHeart">{totalHearts} Like</div>

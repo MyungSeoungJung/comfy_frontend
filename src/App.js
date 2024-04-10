@@ -2,7 +2,6 @@ import React, { useEffect } from "react";
 import { Routes, Route, useNavigate } from "react-router-dom";
 import "./reset.css";
 import { getCookie } from './utils/cookie.js';
-
 import Login from "./component/Login.js";
 import Signup from "./component/Signup.js";
 import LayOut from "./component/LayOut.js";
@@ -13,6 +12,7 @@ import RecoWidget from "./component/reco/RecoWidget.js";
 import StudyDetailPage from "./component/study/studyDetailPage/StudyDetailPage.js";
 import MyPage from "./component/myPage/MyPage.js";
 import TabComponent from "./component/tabComponent/TabComponent.js";
+import ChatModal from "./component/chatting/ChatModal.js";
 
 function App() {
   const navigate = useNavigate();
@@ -41,6 +41,7 @@ function App() {
           <Route key="StudyDetailPage" path="study/:id" element={<StudyDetailPage />} />
           <Route key="MyPage" path="MyPage" element={<MyPage />} />
           <Route key="TabComponent" path="TabComponent" element={<TabComponent />} />
+          <Route key="ChatModal" path="ChatModal" element={<ChatModal />} />
         </Route>
       </Routes>
 
