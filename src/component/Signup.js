@@ -20,15 +20,20 @@ function Signup() {
     // 이미지를 등록하지 않았을 경우 기본 이미지 URL을 사용하고, 등록했을 경우에는 업로드한 이미지 URL을 사용합니다.
     const imageUrlToSend = imgPreView.length > 0 ? imgPreView[0] : defaultImageUrl;
 
-    const data = {
-      email: email,
-      nickName: nickname,
-      password: password,
-      profileImage: imageUrlToSend,
-    };
+    const formData = new FormData();
+    formData.append("email", email);
+    formData.append("nickName", nickname);
+    formData.append("password", password);
 
+    if (fileRef.current.files.length > 0) {
+      formData.append("profileImage", fileRef.current.files[0]);
+    } else {
+      // 파일이 없는 경우에는 빈 파일 형태로 기본 이미지를 생성하여 추가
+      const blob = await fetch(defaultImageUrl).then((res) => res.blob());
+      formData.append("profileImage", new File([blob], "defaultImage.png"));
+    }
     try {
-      const response = await axios.post(`${baseURL}auth/signUp`, data);
+      const response = await axios.post(`${baseURL}auth/signUp`, formData);
       console.log(response);
       window.location.href = "/Login";
     } catch (error) {
@@ -89,7 +94,7 @@ function Signup() {
                   <input
                     type="file"
                     multiple
-                    accept="image/*, video/*"
+                    accept="image/*"
                     ref={fileRef}
                     onChange={handleImgPreview}
                     id="file"

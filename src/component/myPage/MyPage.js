@@ -3,12 +3,14 @@ import "../../styles/MyPage.css";
 import http from "../../utils/http";
 
 const MyPage = () => {
+
+
     const [userInfo, setUserInfo] = useState({
         nickname: "",
         introduction: "",
         userImg: ""
     });
-
+    let uuidFilename = userInfo.userImg;
     useEffect(() => {
         const fetchData = async () => {
             try {
@@ -25,29 +27,6 @@ const MyPage = () => {
         };
         fetchData();
     }, []);
-
-    const handleImgPreview = (event) => {
-        const files = event.target.files;
-        const previews = [];
-
-        for (let i = 0; i < files.length; i++) {
-            const file = files[i];
-            const reader = new FileReader();
-
-            reader.onload = (e) => {
-                previews.push(e.target.result);
-
-                if (previews.length === files.length) {
-                    setUserInfo({
-                        ...userInfo,
-                        userImg: previews[0]
-                    });
-                }
-            };
-
-            reader.readAsDataURL(file);
-        }
-    };
 
     const handleNicknameChange = (event) => {
         setUserInfo({
@@ -83,7 +62,7 @@ const MyPage = () => {
                 <div className="myPage-profile-img-contain">
                     <h1>프로필 이미지</h1>
                     <div className="profile-img">
-                        <img src={userInfo.userImg} id="preview-img" alt="프로필 이미지 미리보기" />
+                        <img src={`http://192.168.0.23:8080/user/file/${uuidFilename}`} id="preview-img" alt="프로필 이미지 미리보기" />
                         <div>
                             <label htmlFor="file">
                                 <div className="profile-change">변경</div>
@@ -91,7 +70,6 @@ const MyPage = () => {
                                     type="file"
                                     multiple
                                     accept="image/*, video/*"
-                                    onChange={handleImgPreview}
                                     id="file"
                                 />
                             </label>
