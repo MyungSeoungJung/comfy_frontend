@@ -10,7 +10,9 @@ const MyPage = () => {
         introduction: "",
         userImg: ""
     });
+
     let uuidFilename = userInfo.userImg;
+
     useEffect(() => {
         const fetchData = async () => {
             try {

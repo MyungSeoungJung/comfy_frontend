@@ -12,8 +12,6 @@ const CreateStudyGruop = () => {
     const [study, setStudy] = useState([]);
     const [PopularHashTag, setPopularHashTag] = useState([]);
     const [PopularStudy, setPopularStudy] = useState([]);
-
-
     const navigate = useNavigate();
 
     const openWriteModal = () => {
@@ -125,17 +123,21 @@ const CreateStudyGruop = () => {
                     </div>
                     <div className="popular-study-contain">
                         <div><h2>모집중인 인기 글</h2></div>
-                        {PopularStudy.map((study) => (
-                            <div>
-                                <span>{study.title} </span>
-                                <div>
-                                    <div>  <img src={study.userImg} alt="" /></div>
-                                    <p>{study.userNickName}</p>
+
+                        {PopularStudy.map((study) => {
+                            const uuidFilename = study.userImg; // study 객체의 userImg 속성을 변수에 할당
+                            return (
+                                <div key={study.id}>
+                                    <span>{study.title}</span>
+                                    <div>
+                                        <div>
+                                            <img src={`http://192.168.0.23:8080/user/file/${uuidFilename}`} alt="" />
+                                        </div>
+                                        <p>{study.userNickName}</p>
+                                    </div>
                                 </div>
-                            </div>
-
-
-                        ))}
+                            );
+                        })}
                     </div>
                 </aside>
                 {/* side 인기태그 */}

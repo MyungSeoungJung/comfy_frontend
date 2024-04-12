@@ -11,12 +11,12 @@ import http from "../../../utils/http";
 const StudyDetailPage = () => {
     const navigate = useNavigate();
     const [heartFilled, setHeartFilled] = useState(false);
-    const [study, setStudy] = useState({});
+    const [study, setStudy] = useState({}); // 스터디 정보 
     const [totalHearts, setTotalHearts] = useState(0);
     const commentRef = useRef();
-    const [studyComment, setStudyComment] = useState([]);
-    const [userInfo, setUserInfo] = useState({ userImg: "", userNickName: "" });
-
+    const [studyComment, setStudyComment] = useState([]); //댓글 작성 유저 정보
+    const [userInfo, setUserInfo] = useState({ userImg: "", userNickName: "" });  // 로그인한 유저 정보
+    //하트 클릭
     const handleHeartClick = async () => {
         const id = window.location.search;
         try {
@@ -37,7 +37,9 @@ const StudyDetailPage = () => {
     const handleChat = () => {
         navigate(`/ChatModal?toUserId=${study.writerId}`);
     }
+    let uuidFilename = study.writerImg;
 
+    // 시간 format
     const formatCreateTime = (createTime) => {
         if (!createTime) return ""; // 빈 값인 경우 빈 문자열 반환
         const date = new Date(createTime[0], createTime[1] - 1, createTime[2], createTime[3], createTime[4], createTime[5], createTime[6] / 1000000);
@@ -92,25 +94,6 @@ const StudyDetailPage = () => {
         console.log(response);
     }
 
-    // const handleImgPreview = (event) => {
-    //     const files = event.target.files;
-    //     const previews = [];
-
-    //     for (let i = 0; i < files.length; i++) {
-    //         const file = files[i];
-    //         const reader = new FileReader();
-
-    //         reader.onload = (e) => {
-    //             previews.push(e.target.result);
-
-    //             if (previews.length === files.length) {
-    //                 setUserInfo(previews);
-    //             }
-    //         };
-
-    //         reader.readAsDataURL(file);
-    //     }
-    // };
 
     return (
         <>
@@ -150,19 +133,21 @@ const StudyDetailPage = () => {
                                 <p> 작성한 스터디</p>
                             </div>
                             <div className="wrtier-img">
-                                <img src={study.writerImg} alt="" />
+                                <img src={`http://192.168.0.23:8080/user/file/${uuidFilename}`} alt="" />
                             </div>
                         </div>
                         {/* 댓글 영역 */}
                         <div className="studyDetail-comment">
                             <div className="studyDetail-comment-view">
-                                {studyComment.map((studyComment, idx) => (
-                                    <div className="comment-content">
-                                        <img src={userInfo.userImg} id="comment-profile-img" />
-                                        <div><h2>{studyComment.userNickName}</h2>  <p>{studyComment.content}</p></div>
-                                    </div>
-
-                                )
+                                {studyComment.map((studyComment, idx) => {
+                                    const uuidFilename = studyComment.userImg;
+                                    return (
+                                        <div className="comment-content">
+                                            <img src={`http://192.168.0.23:8080/user/file/${uuidFilename}`} id="comment-profile-img" />
+                                            <div><h2>{studyComment.userNickName}</h2>  <p>{studyComment.content}</p></div>
+                                        </div>
+                                    )
+                                }
                                 )}
 
                             </div>

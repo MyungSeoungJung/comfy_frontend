@@ -11,12 +11,12 @@ import Home from "./component/Home.js";
 import RecoWidget from "./component/reco/RecoWidget.js";
 import StudyDetailPage from "./component/study/studyDetailPage/StudyDetailPage.js";
 import MyPage from "./component/myPage/MyPage.js";
-import TabComponent from "./component/tabComponent/TabComponent.js";
+// import TabComponent from "./component/tabComponent/TabComponent.js";
 import ChatModal from "./component/chatting/ChatModal.js";
 
 function App() {
   const navigate = useNavigate();
-
+  // 토큰 만료 체크 후 없으면 login으로 리다이렉션
   useEffect(() => {
     const token = getCookie('token');
     if (!token && window.location.pathname !== '/SignUp') {
@@ -40,9 +40,9 @@ function App() {
           <Route key="CreateStudyGruop" path="CreateStudyGruop" element={<CreateStudyGruop />} />
           <Route key="StudyDetailPage" path="study/:id" element={<StudyDetailPage />} />
           <Route key="MyPage" path="MyPage" element={<MyPage />} />
-          <Route key="TabComponent" path="TabComponent" element={<TabComponent />} />
-          <Route key="ChatModal" path="ChatModal" element={<ChatModal />} />
+          {/* <Route key="TabComponent" path="TabComponent" element={<TabComponent />} /> */}
         </Route>
+        <Route key="ChatModal" path="ChatModal" element={<ChatModal />} />
       </Routes>
 
       {/* 채팅위젯 및 추천위젯 */}
