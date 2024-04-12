@@ -1,0 +1,94 @@
+.chatModal-container {
+    display: flex;
+    flex-direction: row;
+    background-color: blue;
+    width: 100%;
+    height: 100vh;
+}
+
+.chatModal-nav {
+    background-color: white;
+    width: 100px;
+    display: flex;
+    text-align: center;
+    justify-content: center;
+}
+
+.chatModal-nav li {
+    width: 100%;
+    height: 80px;
+    display: flex;
+    justify-content: center;
+}
+
+.chatModal-nav>ul>h1 {
+    margin-top: 35px;
+    margin-bottom: 40px;
+}
+
+.chatList-container {
+    display: flex;
+    flex-direction: column;
+    background-color: red;
+    width: 30%;
+    padding-left: 24px;
+    padding-top: 35px;
+    padding-bottom: 0px;
+}
+
+.chatList-container>h2 {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.chatLog-container {
+    width: 70%;
+    background-color: aqua;
+}
+
+.chatList {
+    background-color: white;
+    height: 100%;
+}
+
+/* 로고 사이즈 */
+.chatModal-nav svg {
+    font-size: 30px;
+    stroke-width: 0.7px;
+}
+
+/* 굵기 달라서 따로 id */
+#HiOutlineBellAlert {
+    stroke-width: 1.8px;
+}
+
+#GoHome {
+    stroke-width: 0.3px;
+}
+
+.chat-tab {
+    display: flex;
+    flex-direction: row;
+}
+
+.profileInfo {
+    margin-left: 15px;
+}
+
+.chatingInput-container {
+    min-height: 10%;
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+}
+
+.chatingInput-container>input {
+    width: 90%;
+    border-radius: 30px;
+    padding: 10px;
+    padding-left: 20px;
+}
+
+.chatLog {
+    height: 90%;
+}

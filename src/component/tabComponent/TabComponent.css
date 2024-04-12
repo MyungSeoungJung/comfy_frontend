@@ -1,0 +1,46 @@
+.tabComponent {
+    display: flex;
+    list-style-type: none;
+    padding-left: 0;
+    width: 100%;
+    position: relative;
+}
+
+.tab {
+    padding-bottom: 5px;
+    cursor: pointer;
+    padding-left: 20px;
+    padding-right: 20px;
+
+}
+
+.tab.active {
+    position: relative;
+}
+
+.tab.active:before {
+    content: '';
+    position: absolute;
+    bottom: -0px;
+    /* 전체 회색선과 동일한 위치로 조정 */
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background-color: black;
+    /* 클릭한 탭의 아래 선 색상을 파란색으로 설정 */
+}
+
+.tab-content {
+    margin-top: 10px;
+}
+
+.tabComponent:before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    border-bottom: 1px solid #dee2e6;
+    /* 전체 회색선의 색상 설정 */
+}

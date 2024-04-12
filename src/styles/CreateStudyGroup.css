@@ -1,0 +1,326 @@
+button {
+    border-radius: 8px;
+}
+
+.create-study-wrapper {
+    width: 63%;
+    margin-left: 100px;
+}
+
+.create-study-body {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+}
+
+/* 가운데 검색 & main 컨테이너 */
+.create-study-center {
+    display: flex;
+    flex: 3;
+    min-height: 100vh;
+    flex-direction: column;
+}
+
+.create-study-banner {
+    background-color: #333b3d;
+    width: 100%;
+    height: 100px;
+    color: white;
+    margin-bottom: 30px;
+    margin-top: 30px;
+    border-radius: 3px;
+    padding: 20px;
+}
+
+.create-study-banner>h1 {
+    font-size: 1.2rem;
+    margin-bottom: 6px;
+}
+
+.create-study-contain {
+    display: flex;
+    flex: 3;
+    min-height: 100vh;
+    flex-direction: column;
+}
+
+/* 모집중 모집완료 컨테이너 */
+.create-study-state {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+/* .create-study-state>button {
+    margin-right: 12px;
+    background-color: white;
+} */
+
+
+/*  오른쪽 인기태그 */
+.create-study-side {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 600px;
+    margin-left: 100px;
+}
+
+.create-study-side>div:nth-of-type(1) {
+    margin-bottom: 12px;
+}
+
+/* 스터디, 태그로 검색 부분 div */
+.create-study-search {
+    display: flex;
+    flex-direction: column;
+}
+
+/* 스터디, 태그로 검색 input */
+.create-study-search input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+
+/* 스터디 검색 div */
+.create-study-search>div:nth-of-type(1) {
+    display: flex;
+    flex-direction: row;
+}
+
+/* 스터디 검색 button */
+.create-study-search>div:nth-of-type(1)>button {
+    background-color: #00c471;
+    min-width: 96px;
+    margin-left: 15px;
+    color: white;
+    border: none;
+}
+
+/* 태그로 검색 div */
+.create-study-search>div:nth-of-type(2) {
+    display: flex;
+    flex-direction: row;
+}
+
+/* 초기화 button */
+.create-study-search>div:nth-of-type(2)>button {
+    background-color: white;
+    min-width: 96px;
+    margin-left: 15px;
+    color: black;
+}
+
+/* 메인 영역 컨테이너 */
+.create-study-content {
+    height: 100%;
+}
+
+/* 컨텐츠 최신순, 좋아요순 글쓰기 컨테이너*/
+.create-study-content-top {
+    display: flex;
+    flex-direction: row;
+    height: 40px;
+    margin-bottom: 12px;
+}
+
+.create-study-content-top div:nth-of-type(1) button {
+    background-color: white;
+    margin-right: 10px;
+}
+
+/* 최신순, 좋아요순 div */
+.create-study-content-top>div:nth-of-type(1) {
+    display: flex;
+    flex: 0.9;
+    align-items: center;
+}
+
+/* 글쓰기 버튼 div */
+.create-study-content-top>div:nth-of-type(2) {
+    display: flex;
+    flex: 0.1;
+}
+
+.create-study-content-top>div:nth-of-type(2) button {
+    background-color: #3e4042;
+    min-width: 96px;
+    margin-left: 15px;
+    color: white;
+}
+
+/* 게시글 콘텐츠 부분 div */
+.create-study-content-main {
+    height: 100%;
+}
+
+/* 스터디 게시물*/
+#stduy-content-contain {
+    display: flex;
+    flex-direction: column;
+    border-bottom: 1px solid #dee2e6;
+    border-top: 1px solid #dee2e6;
+    padding-top: 18px;
+    padding-bottom: 18px;
+}
+
+#study-content-top {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+#study-content-top>span {
+    margin-right: 10px;
+}
+
+#study-content-middle {
+    margin-bottom: 16px;
+    margin-top: 12px;
+    width: 700px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    color: #495057;
+}
+
+#study-content-bottom {
+    display: flex;
+    flex-direction: row;
+    color: #868e96;
+}
+
+#study-content-bottom div {
+    display: flex;
+    flex: 1;
+}
+
+#study-content-bottom>div:nth-of-type(2) {
+    justify-content: right;
+}
+
+#study-content-bottom>div>span:nth-child(1) {
+    margin-right: 12px;
+}
+
+.study-content-tag {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+
+.study-content-tag>button:nth-of-type(1) {
+    margin-left: 0px;
+    background-color: #eff3fa;
+    display: inline-block;
+    line-height: 1.38;
+    padding: 5px 12px;
+    height: 30px;
+    color: #3e4042;
+    margin-bottom: 15px;
+    border-radius: 3px;
+}
+
+.study-content-tag>button {
+    margin-left: 5px;
+    background-color: #eff3fa;
+    display: inline-block;
+    text-align: center;
+    padding: 5px 12px;
+    height: 30px;
+    color: #3e4042;
+    margin-bottom: 15px;
+    border-radius: 3px;
+
+}
+
+#study-recruit-status {
+    padding: 5px;
+    border-radius: 20px;
+    background-color: #00c471;
+    color: #fff;
+    font-size: 0.8rem;
+}
+
+.PopularHashTag-contain {
+    display: flex;
+    flex-direction: row;
+    display: flex;
+    flex-wrap: wrap;
+    border: 1px solid #dee2e6;
+    border-radius: 5px;
+    padding: 12px;
+    padding-bottom: 6px;
+
+}
+
+.PopularHashTag-contain>span {
+    font-size: 0.9rem;
+}
+
+.PopularHashTag-contain>div:nth-of-type(1) {
+    margin-bottom: 12px;
+}
+
+.PopularHashTag-contain>div:nth-of-type(2)>button {
+    margin-right: 5px;
+    background-color: #eff3fa;
+    display: inline-block;
+    line-height: 1.38;
+    padding: 5px 12px;
+    height: 30px;
+    color: #3e4042;
+    margin-bottom: 10px;
+    border-radius: 3px;
+}
+
+.popular-study-contain {
+    padding: 12px;
+    border: 1px solid #dee2e6;
+    width: 100%;
+    height: 400px;
+    border-radius: 5px;
+}
+
+/* 인기글 타이틀 부분 */
+.popular-study-contain>div>span {
+    font-size: 14px;
+    color: #495057;
+    font-weight: 500;
+}
+
+.popular-study-contain>div:nth-of-type(1) {
+    margin-bottom: 20px
+}
+
+/* 인기글 이미지 닉네임 div 부분 */
+.popular-study-contain>div>div {
+    display: flex;
+    margin-bottom: 20px;
+    margin-top: 6px;
+}
+
+/* 인기글 이미지 닉네임 유저 닉네임*/
+.popular-study-contain>div>div>p {
+    font-weight: 700;
+    line-height: 150%;
+    color: #212529;
+    font-size: 14px;
+}
+
+.popular-study-contain>div>div>div {
+    width: 18px;
+    height: 18px;
+    margin-right: 6px;
+}
+
+.popular-study-contain>div>div>div>img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+}
