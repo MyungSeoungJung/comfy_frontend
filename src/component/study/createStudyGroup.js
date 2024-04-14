@@ -6,6 +6,7 @@ import WriteModal from "../writeModal/WriteModal";
 import http from "../../utils/http";
 import { LuRefreshCw } from "react-icons/lu";
 import TabComponent from "../tabComponent/TabComponent";
+import { isLocalhost } from "../../utils/DomainUrl";
 
 const CreateStudyGruop = () => {
     const [writeModalHandle, setWriteModalHandle] = useState(false);
@@ -131,7 +132,8 @@ const CreateStudyGruop = () => {
                                     <span>{study.title}</span>
                                     <div>
                                         <div>
-                                            <img src={`http://192.168.0.23:8080/user/file/${uuidFilename}`} alt="" />
+                                            {/* 인기글 작성자 프로필 이미지 */}
+                                            <img src={`${isLocalhost()}user/file/${uuidFilename}`} alt="" />
                                         </div>
                                         <p>{study.userNickName}</p>
                                     </div>

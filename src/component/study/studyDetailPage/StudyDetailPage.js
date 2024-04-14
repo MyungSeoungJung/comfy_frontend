@@ -5,8 +5,8 @@ import { IoChatbubbleOutline } from "react-icons/io5";
 import React, { useEffect, useState } from "react";
 import { useRef } from "react";
 import { useNavigate } from "react-router-dom";
-
 import http from "../../../utils/http";
+import { isLocalhost } from "../../../utils/DomainUrl"
 
 const StudyDetailPage = () => {
     const navigate = useNavigate();
@@ -133,7 +133,7 @@ const StudyDetailPage = () => {
                                 <p> 작성한 스터디</p>
                             </div>
                             <div className="wrtier-img">
-                                <img src={`http://192.168.0.23:8080/user/file/${uuidFilename}`} alt="" />
+                                <img src={`${isLocalhost()}user/file/${uuidFilename}`} alt="" />
                             </div>
                         </div>
                         {/* 댓글 영역 */}
@@ -143,7 +143,7 @@ const StudyDetailPage = () => {
                                     const uuidFilename = studyComment.userImg;
                                     return (
                                         <div className="comment-content">
-                                            <img src={`http://192.168.0.23:8080/user/file/${uuidFilename}`} id="comment-profile-img" />
+                                            <img src={`${isLocalhost()}user/file/${uuidFilename}`} id="comment-profile-img" />
                                             <div><h2>{studyComment.userNickName}</h2>  <p>{studyComment.content}</p></div>
                                         </div>
                                     )

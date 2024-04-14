@@ -13,7 +13,7 @@ import StudyDetailPage from "./component/study/studyDetailPage/StudyDetailPage.j
 import MyPage from "./component/myPage/MyPage.js";
 // import TabComponent from "./component/tabComponent/TabComponent.js";
 import ChatModal from "./component/chatting/ChatModal.js";
-
+import ChatRoom from "./component/chatting/ChatRoom.js";
 function App() {
   const navigate = useNavigate();
   // 토큰 만료 체크 후 없으면 login으로 리다이렉션
@@ -42,7 +42,10 @@ function App() {
           <Route key="MyPage" path="MyPage" element={<MyPage />} />
           {/* <Route key="TabComponent" path="TabComponent" element={<TabComponent />} /> */}
         </Route>
-        <Route key="ChatModal" path="ChatModal" element={<ChatModal />} />
+        {/* 채팅 */}
+        <Route path="ChatModal" key="ChatModal" element={<ChatModal />}>
+          <Route path="chat/*" element={<ChatRoom />} />
+        </Route>
       </Routes>
 
       {/* 채팅위젯 및 추천위젯 */}

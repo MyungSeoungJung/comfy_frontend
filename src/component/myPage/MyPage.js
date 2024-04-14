@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "../../styles/MyPage.css";
 import http from "../../utils/http";
-
+import { isLocalhost } from "../../utils/DomainUrl"
 const MyPage = () => {
 
 
@@ -64,7 +64,7 @@ const MyPage = () => {
                 <div className="myPage-profile-img-contain">
                     <h1>프로필 이미지</h1>
                     <div className="profile-img">
-                        <img src={`http://192.168.0.23:8080/user/file/${uuidFilename}`} id="preview-img" alt="프로필 이미지 미리보기" />
+                        <img src={`${isLocalhost()}user/file/${uuidFilename}`} id="preview-img" alt="프로필 이미지 미리보기" />
                         <div>
                             <label htmlFor="file">
                                 <div className="profile-change">변경</div>
