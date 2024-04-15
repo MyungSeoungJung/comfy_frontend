@@ -15,7 +15,7 @@ const StudyDetailPage = () => {
     const [totalHearts, setTotalHearts] = useState(0);
     const commentRef = useRef();
     const [studyComment, setStudyComment] = useState([]); //댓글 작성 유저 정보
-    const [userInfo, setUserInfo] = useState({ userImg: "", userNickName: "" });  // 로그인한 유저 정보
+    const [userInfo, setUserInfo] = useState({ userImg: "", userNickName: "", userId: "" });  // 로그인한 유저 정보
     //하트 클릭
     const handleHeartClick = async () => {
         const id = window.location.search;
@@ -35,7 +35,8 @@ const StudyDetailPage = () => {
     };
     // 채팅 이동
     const handleChat = () => {
-        navigate(`/ChatModal?toUserId=${study.writerId}`);
+        const url = `/ChatModal/chat/${userInfo.userId}/m/${study.writerId}`;
+        navigate(url, { state: { toUserId: study.writerId, roomId: study.writerId + userInfo.userId } });
     }
     let uuidFilename = study.writerImg;
 
@@ -65,13 +66,15 @@ const StudyDetailPage = () => {
                 setStudyComment(commentResponse.data);
 
                 // 사용자 정보 가져오기
-                const imgResponse = await http.get(`user/getUserInfo`);
-                setUserInfo({ userImg: imgResponse.data.userImg, userNickName: imgResponse.data.userNickName });
-
+                const userInfoResponse = await http.get(`user/getUserInfo`);
+                setUserInfo({ userImg: userInfoResponse.data.userImg, userNickName: userInfoResponse.data.userNickName, userId: userInfoResponse.data.userId }
+                );
+                console.log(userInfo.userId);
             } catch (error) {
                 console.error("Error fetching data:", error);
                 // 에러 처리
             }
+
         };
 
         fetchData();

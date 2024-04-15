@@ -8,7 +8,7 @@ import { GoHome } from "react-icons/go";
 import { HiOutlineBellAlert } from "react-icons/hi2";
 import { CiSquarePlus, CiChat2, CiUser } from "react-icons/ci";
 import { isLocalhost } from "../../utils/DomainUrl";
-import { Outlet } from "react-router";
+import { Outlet, useNavigate } from "react-router";
 
 const ChatModal = () => {
     const location = useLocation();
@@ -22,7 +22,7 @@ const ChatModal = () => {
     const [roomNick, setRoomNick] = useState('')
     const [roomProfileImg, setRoomProfileImg] = useState('')
     const [myInfo, setMyInfo] = useState('')
-
+    const navigate = useNavigate();
 
     const state = location.state && location.state?.backgroundLocation
 
@@ -84,7 +84,7 @@ const ChatModal = () => {
         setCurrentRoomId(roomId);
         console.log(roomId);
         const url = `/ChatModal/chat/${myInfo}/m/${toUserId}`;
-        window.history.pushState({}, '', url);
+        navigate(url);
     }
 
     return (
@@ -145,7 +145,7 @@ const ChatModal = () => {
             {/* 채팅 대화내역 띄우는 영역 */}
             <div className='chatLog-container'>
                 <div className='chatLog'>
-                    <Outlet context={{ receiveMessage, currentRoomId, myInfo, currentUserId, stompClient }} />
+                    <Outlet context={{ receiveMessage, currentRoomId, myInfo, currentUserId, stompClient, setCurrentUserId, setCurrentRoomId }} />
                 </div>
 
             </div>
