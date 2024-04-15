@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useRef } from 'react';
 import http from '../../utils/http';
-import { useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import SockJS from 'sockjs-client';
 import { Stomp } from '@stomp/stompjs';
 import "../../styles/ChatModal.css"
@@ -21,6 +21,7 @@ const ChatModal = () => {
     const [chatList, setChatList] = useState([])
     const [roomNick, setRoomNick] = useState('')
     const [roomProfileImg, setRoomProfileImg] = useState('')
+    const [isRead, setIsRead] = useState("false")
     const [myInfo, setMyInfo] = useState('')
     const navigate = useNavigate();
 
@@ -78,6 +79,7 @@ const ChatModal = () => {
 
     //  채팅방 선택 
     const selectRoom = (toUserId, roomId, nick, img) => {
+        readNoti(roomId)
         setRoomNick(nick);
         setRoomProfileImg(img);
         setCurrentUserId(toUserId);
@@ -85,21 +87,34 @@ const ChatModal = () => {
         console.log(roomId);
         const url = `/ChatModal/chat/${myInfo}/m/${toUserId}`;
         navigate(url);
+        setIsRead(true);
     }
+    // 안읽은 채팅방 읽음처리
+    const readNoti = async (id) => {
+        try {
+            await http.post(`/chat/read`, { roomId: id })
+        } catch (error) {
+            console.log(error);
+        }
+    }
+    useEffect(() => {
+        if (stompClient.current.connected) {
+            readNoti(fromPageRoomId || currentRoomId)
+        }
+    }, [receiveMessage])
 
     return (
         <div className='chatModal-container'>
             <div className='chatModal-nav'>
                 <ul>
                     <h1 className='logo'>comfy</h1>
-                    <li><GoHome id='GoHome' /></li>
+                    <Link to="/"><li><GoHome id='GoHome' /></li></Link>
                     <li><HiOutlineBellAlert id='HiOutlineBellAlert' /></li>
+                    <Link to="/CreateStudyGruop"><li><CiSquarePlus /></li></Link>
 
-                    <li><CiSquarePlus /></li>
+                    <Link to=""><li><CiChat2 /></li></Link>
 
-                    <li><CiChat2 /></li>
-
-                    <li><CiUser /></li>
+                    <Link to="/MyPage">   <li><CiUser /></li></Link>
                 </ul>
             </div>
             <div className='chatList-container'>
@@ -125,19 +140,20 @@ const ChatModal = () => {
                                 <div className="profileInfo">
                                     <div className="tab-nick">
                                         <h2>{item.toUserNick}</h2>
+                                        <div className="chat-noti">
+                                            <div>
+                                                {
+                                                    item.isRead ?
+                                                        <div className="read-noti-dot"></div>
+                                                        :
+                                                        <div className="noti-dot"></div>
+                                                }
+                                            </div>
+                                        </div>
                                     </div>
                                     <div className="tab-last">{item.lastMsg}</div>
                                 </div>
-                                <div className="chat-noti">
-                                    <div>
-                                        {
-                                            item.isRead ?
-                                                <div></div>
-                                                :
-                                                <div className="noti-dot"></div>
-                                        }
-                                    </div>
-                                </div>
+
                             </div>)
                     })}
                 </div>

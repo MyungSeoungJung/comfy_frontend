@@ -1,7 +1,6 @@
 .chatModal-container {
     display: flex;
     flex-direction: row;
-    background-color: blue;
     width: 100%;
     height: 100vh;
 }
@@ -12,6 +11,7 @@
     display: flex;
     text-align: center;
     justify-content: center;
+    border-right: 1px solid #ccc;
 }
 
 .chatModal-nav li {
@@ -29,12 +29,19 @@
 .chatList-container {
     display: flex;
     flex-direction: column;
-    background-color: red;
     width: 30%;
     padding-left: 24px;
     padding-top: 35px;
     padding-bottom: 0px;
+    border-right: 1px solid #ccc;
+
 }
+
+.tab-nick {
+    display: flex;
+    flex-direction: row;
+}
+
 
 .chatList-container>h2 {
     margin-top: 20px;
@@ -43,11 +50,9 @@
 
 .chatLog-container {
     width: 70%;
-    background-color: aqua;
 }
 
 .chatList {
-    background-color: white;
     height: 100%;
 }
 
@@ -66,9 +71,14 @@
     stroke-width: 0.3px;
 }
 
+.chat-noti {
+    margin-left: 5px;
+}
+
 .chat-tab {
     display: flex;
     flex-direction: row;
+    margin-bottom: 10px;
 }
 
 .profileInfo {
@@ -80,15 +90,38 @@
     display: flex;
     justify-content: center;
     padding: 20px;
+    position: fixed;
+    width: 60%;
+    bottom: 0;
+    right: 3%;
 }
 
 .chatingInput-container>input {
-    width: 90%;
+    width: 100%;
     border-radius: 30px;
     padding: 10px;
     padding-left: 20px;
+    border: 1px solid #ccc;
 }
 
 .chatLog {
     height: 90%;
+}
+
+/* 안 읽읽었을때 색깔 */
+.noti-dot {
+    width: 5px;
+    height: 5px;
+    border: 1px solid rgb(228, 23, 23);
+    border-radius: 50%;
+    background-color: rgb(228, 23, 23);
+
+}
+
+.read-noti-dot {
+    width: 5px;
+    height: 5px;
+    border: 1px solid skyblue;
+    border-radius: 50%;
+    background-color: skyblue;
 }

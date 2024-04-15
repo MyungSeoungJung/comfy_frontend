@@ -1,0 +1,68 @@
+.logList {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    overflow-y: auto;
+    height: 100%;
+
+    .anotherMsg {
+        display: flex;
+        flex-direction: column;
+        margin-left: 8px;
+        padding: 5px;
+
+        .msg-wrap {
+            margin-right: auto;
+
+            .msg-box {
+                display: flex;
+
+                .profileImg {
+                    img {
+                        width: 30px;
+                        height: 30px;
+                        border-radius: 50%;
+                        object-fit: cover;
+                    }
+                }
+
+                .msg {
+                    padding: 7px 12px;
+                    background-color: rgb(239, 239, 239);
+                    border-radius: 20px;
+                    margin-left: 10px;
+                    max-width: 380px;
+                }
+            }
+
+            .time {
+                margin-top: 2px;
+                margin-left: 10px;
+                font-size: 12px;
+                text-align: end;
+            }
+        }
+    }
+
+    .myMsg {
+        display: flex;
+        justify-content: end;
+        align-items: center;
+        padding: 5px;
+        margin-right: 8px;
+
+        .msg-box {
+            .msg {
+                padding: 7px 12px;
+                background-color: #3797f0;
+                border-radius: 20px;
+                color: #ffffff;
+                max-width: 380px;
+            }
+
+            .time {
+                font-size: 12px;
+            }
+        }
+    }
+}
