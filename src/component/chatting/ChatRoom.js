@@ -6,6 +6,7 @@ import moment from "moment";
 import "../../styles/ChatRoom.css"
 import { isLocalhost } from "../../utils/DomainUrl";
 
+
 const ChatRoom = () => {
     const { receiveMessage, currentRoomId, myInfo, currentUserId, stompClient, setCurrentUserId, setCurrentRoomId } = useOutletContext()
     const location = useLocation()
@@ -99,6 +100,7 @@ const ChatRoom = () => {
 
     return (
         <div className="logList">
+
             <div className="logList">
                 {chatLog.map((item, index) => {
                     const uuidFilename = item.profileImg;

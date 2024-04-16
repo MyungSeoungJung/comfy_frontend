@@ -81,13 +81,15 @@ const ChatModal = () => {
     const selectRoom = (toUserId, roomId, nick, img) => {
         readNoti(roomId)
         setRoomNick(nick);
-        setRoomProfileImg(img);
         setCurrentUserId(toUserId);
         setCurrentRoomId(roomId);
         console.log(roomId);
         const url = `/ChatModal/chat/${myInfo}/m/${toUserId}`;
         navigate(url);
         setIsRead(true);
+        // 선택된 채팅방 to유저 프로필 이미지
+        const uuidFilename = img;
+        setRoomProfileImg(`${uuidFilename}`);
     }
     // 안읽은 채팅방 읽음처리
     const readNoti = async (id) => {
@@ -161,6 +163,8 @@ const ChatModal = () => {
             {/* 채팅 대화내역 띄우는 영역 */}
             <div className='chatLog-container'>
                 <div className='chatLog'>
+                    <div className="chatLog-toUserNickName"><img src={`${roomProfileImg}`} style={{ width: "50px", height: "50px", borderRadius: "50%" }} />
+                        <p> {roomNick} </p></div>
                     <Outlet context={{ receiveMessage, currentRoomId, myInfo, currentUserId, stompClient, setCurrentUserId, setCurrentRoomId }} />
                 </div>
 

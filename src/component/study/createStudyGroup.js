@@ -7,6 +7,8 @@ import http from "../../utils/http";
 import { LuRefreshCw } from "react-icons/lu";
 import TabComponent from "../tabComponent/TabComponent";
 import { isLocalhost } from "../../utils/DomainUrl";
+import Pagination from "react-js-pagination";
+import '../../styles/Paging.css'
 
 const CreateStudyGruop = () => {
     const [writeModalHandle, setWriteModalHandle] = useState(false);
@@ -14,6 +16,9 @@ const CreateStudyGruop = () => {
     const [PopularHashTag, setPopularHashTag] = useState([]);
     const [PopularStudy, setPopularStudy] = useState([]);
     const navigate = useNavigate();
+    const [page, setPage] = useState(1);
+    const [totalPages, setTotalPages] = useState(1);
+
 
     const openWriteModal = () => {
         setWriteModalHandle(true);
@@ -22,12 +27,9 @@ const CreateStudyGruop = () => {
     const closeWriteModal = () => {
         setWriteModalHandle(false);
     };
-    // study Get
+    // 인기 글, 인기해시태그 Get
     useEffect(() => {
         const fetchData = async () => {
-            const response = await http.get("study/getStudy");
-            setStudy(response.data)
-
             const PopularHashTagResponse = await http.get("hashTag/PopularHashTag")
             setPopularHashTag(PopularHashTagResponse.data);
 
@@ -37,13 +39,35 @@ const CreateStudyGruop = () => {
         fetchData();
     }, []);
 
+    // 페이지 네이션
+    const handlePageChange = async (pageNumber) => {
+        try {
+            const response = await http.get('/study/getStudyPaging', {
+                params: {
+                    page: pageNumber, // 변경된 페이지 번호
+                    size: 1 // 페이지 당 아이템 수
+                }
+            });
+            setStudy(response.data.content)
+            setTotalPages(response.data.totalPages)
+            setPage(pageNumber);
+        } catch (error) {
+            console.error('Error fetching study data:', error);
+            // 에러 처리 로직 추가
+        }
+    };
+
+    //  처음 로딩시 페이지네이션 get
+    useEffect(() => {
+        handlePageChange(page);
+    }, [page == 0]);
+
+    // 스터디 클릭하면 디테일 페이지로 이동
     const handleStudyClick = (studyId) => {
-        // 클릭된 게시물의 ID를 사용하여 URL을 생성
         const url = `/study/studyDetailPage?id=${studyId}`;
-        // 생성된 URL로 페이지를 이동
         navigate(url);
     };
-    //  시간
+    //  시간 format
     const formatCreateTime = (createTime) => {
         if (!createTime) return ""; // 빈 값인 경우 빈 문자열 반환
         const date = new Date(createTime[0], createTime[1] - 1, createTime[2], createTime[3], createTime[4], createTime[5], createTime[6] / 1000000);
@@ -106,6 +130,18 @@ const CreateStudyGruop = () => {
                                         </div>
                                     </div>
                                 ))}
+                                <div>
+                                    <Pagination
+                                        activePage={page}
+                                        itemsCountPerPage={10}
+                                        // 총 리스트 페이지네이션 숫자
+                                        totalItemsCount={450}
+                                        pageRangeDisplayed={totalPages}
+                                        prevPageText={"‹"}
+                                        nextPageText={"›"}
+                                        onChange={handlePageChange}
+                                    />
+                                </div>
                             </div>
                             {/* 컨텐츠 영역*/}
 
@@ -146,7 +182,6 @@ const CreateStudyGruop = () => {
                 {writeModalHandle && <WriteModal isOpen={openWriteModal} onClose={closeWriteModal} />}
             </div>
         </div>
-
     );
 }
 

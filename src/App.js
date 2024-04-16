@@ -50,7 +50,7 @@ function App() {
 
       {/* 채팅위젯 및 추천위젯 */}
       <ChatWidget />
-      <RecoWidget />
+      {/* <RecoWidget /> */}
     </div>
   );
 }
