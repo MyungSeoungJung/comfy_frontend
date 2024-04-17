@@ -36,8 +36,16 @@ const StudyDetailPage = () => {
     // 채팅 이동
     const handleChat = () => {
         const url = `/ChatModal/chat/${userInfo.userId}/m/${study.writerId}`;
-        navigate(url, { state: { toUserId: study.writerId, roomId: study.writerId + userInfo.userId } });
+        navigate(url, {
+            state: {
+                toUserId: study.writerId,
+                roomId: study.writerId + userInfo.userId,
+                toUserImg: study.writerImg,
+                toUserNick: study.creatorNickName // 작성자의 닉네임 정보 전달
+            }
+        });
     }
+    // 작성자 이미지 변수명 format
     let uuidFilename = study.writerImg;
 
     // 시간 format

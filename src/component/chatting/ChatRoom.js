@@ -13,13 +13,14 @@ const ChatRoom = () => {
     const [messageInput, setMessageInput] = useState('')
     const [chatLog, setChatLog] = useState([])
     const { state } = location;
-    const { toUserId, roomId } = state || {};
+    const { toUserId, roomId, toUserImg } = state || {};
 
     // 스터디 디테일 페이지에서 넘어올때 roomId toUserId값 초기화
     useEffect(() => {
         if (roomId && toUserId) {
             setCurrentUserId(toUserId);
             setCurrentRoomId(roomId);
+
         }
     }, [roomId, toUserId, setCurrentUserId, setCurrentRoomId,]);
 
@@ -121,6 +122,7 @@ const ChatRoom = () => {
                                 </div>
                             </div>
                         ) : (
+                            //  상대방 유저 대화 div
                             <div key={item.id} className="anotherMsg">
                                 <div className="msg-wrap">
                                     <div className="msg-box">

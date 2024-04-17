@@ -36,8 +36,8 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/SignUp" element={<Signup />} />
         <Route path="" element={<LayOut />}>
-          <Route index element={<Home />} />
-          <Route key="CreateStudyGruop" path="CreateStudyGruop" element={<CreateStudyGruop />} />
+          {/* <Route index element={<Home />} /> */}
+          <Route index element={<CreateStudyGruop />} />
           <Route key="StudyDetailPage" path="study/:id" element={<StudyDetailPage />} />
           <Route key="MyPage" path="MyPage" element={<MyPage />} />
           {/* <Route key="TabComponent" path="TabComponent" element={<TabComponent />} /> */}

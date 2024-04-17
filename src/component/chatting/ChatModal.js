@@ -9,6 +9,8 @@ import { HiOutlineBellAlert } from "react-icons/hi2";
 import { CiSquarePlus, CiChat2, CiUser } from "react-icons/ci";
 import { isLocalhost } from "../../utils/DomainUrl";
 import { Outlet, useNavigate } from "react-router";
+import { BiChevronDown } from "react-icons/bi";
+import { PiWechatLogoLight } from "react-icons/pi";
 
 const ChatModal = () => {
     const location = useLocation();
@@ -23,6 +25,9 @@ const ChatModal = () => {
     const [roomProfileImg, setRoomProfileImg] = useState('')
     const [isRead, setIsRead] = useState("false")
     const [myInfo, setMyInfo] = useState('')
+    const [userInfo, setUserInfo] = useState({});
+    const { toUserImg, toUserNick } = location.state || {};
+
     const navigate = useNavigate();
 
     const state = location.state && location.state?.backgroundLocation
@@ -37,6 +42,13 @@ const ChatModal = () => {
             fromPageRoomId = currentRoomId
         }
     }
+    // 스터디 디테일 페이지에서 이동했을때 유저 이미지 닉네임 세팅
+    useEffect(() => {
+        if (toUserImg != null && toUserNick != null) {
+            setRoomNick(toUserNick);
+            setRoomProfileImg(`${isLocalhost()}user/file/${toUserImg}`);
+        }
+    }, [toUserImg, toUserNick]);
 
     // 채팅방 연결
     useEffect(() => {
@@ -59,6 +71,7 @@ const ChatModal = () => {
                 {},
             );
         });
+
         return () => {
             stompClient.current.disconnect()
             setConnected(false)
@@ -71,11 +84,24 @@ const ChatModal = () => {
         setMyInfo(response.data.myUser.id)
         setChatList(response.data.rooms.reverse())
     }
+    //  체팅 리스트 useEffect
     useEffect(() => {
         ChatList()
     }, [receiveMessage, connected]) //etChatNoti,
+    // 유저 정보 useEffect
+    useEffect(() => {
+        const fetchUserInfo = async () => {
+            try {
+                const userInfoResponse = await http.get(`user/getUserInfo`);
+                setUserInfo(userInfoResponse.data);
+            } catch (error) {
+                console.log(error);
+            }
+        };
 
+        fetchUserInfo();
 
+    }, []);
 
     //  채팅방 선택 
     const selectRoom = (toUserId, roomId, nick, img) => {
@@ -109,19 +135,18 @@ const ChatModal = () => {
         <div className='chatModal-container'>
             <div className='chatModal-nav'>
                 <ul>
-                    <h1 className='logo'>comfy</h1>
-                    <Link to="/"><li><GoHome id='GoHome' /></li></Link>
+                    <Link to="/"><h1 className='logo'>comfy</h1></Link>
+                    {/* <Link to="/"><li><GoHome id='GoHome' /></li></Link> */}
+                    <Link to="/"><li><CiSquarePlus /></li></Link>
                     <li><HiOutlineBellAlert id='HiOutlineBellAlert' /></li>
-                    <Link to="/CreateStudyGruop"><li><CiSquarePlus /></li></Link>
-
                     <Link to=""><li><CiChat2 /></li></Link>
 
                     <Link to="/MyPage">   <li><CiUser /></li></Link>
                 </ul>
             </div>
             <div className='chatList-container'>
-                <div id='userNickName'> 유저 닉네임</div>
-                <h2>메세지</h2>
+                <div id='userNickName'> <h1>{userInfo.userNickName} <BiChevronDown /></h1></div>
+                <p>메세지</p>
                 <div className='chatList'>
                     {/* 채팅방 리스트 */}
                     {chatList.map(item => {
@@ -141,7 +166,7 @@ const ChatModal = () => {
                                 </div>
                                 <div className="profileInfo">
                                     <div className="tab-nick">
-                                        <h2>{item.toUserNick}</h2>
+                                        <p>{item.toUserNick}</p>
                                         <div className="chat-noti">
                                             <div>
                                                 {
@@ -162,11 +187,24 @@ const ChatModal = () => {
             </div>
             {/* 채팅 대화내역 띄우는 영역 */}
             <div className='chatLog-container'>
-                <div className='chatLog'>
-                    <div className="chatLog-toUserNickName"><img src={`${roomProfileImg}`} style={{ width: "50px", height: "50px", borderRadius: "50%" }} />
-                        <p> {roomNick} </p></div>
-                    <Outlet context={{ receiveMessage, currentRoomId, myInfo, currentUserId, stompClient, setCurrentUserId, setCurrentRoomId }} />
-                </div>
+                {roomNick ? (
+                    <div className='chatLog'>
+
+                        <div className="chatLog-toUserNickName"><img src={`${roomProfileImg}`} style={{ width: "50px", height: "50px", borderRadius: "50%", }} />
+                            <p> {roomNick} </p></div>
+
+                        <Outlet context={{ receiveMessage, currentRoomId, myInfo, currentUserId, stompClient, setCurrentUserId, setCurrentRoomId }} />)
+
+                    </div>
+                ) : (
+                    <div className='chatLog-defaultContent'>
+                        <span><PiWechatLogoLight /></span>
+                        <p>내 메시지</p>
+                        <p> 친구나 그룹에 비공개 사진과 메시지를 보내보세요</p>
+                        <button>메세지 보내기</button>
+                    </div>
+                )}
+
 
             </div>
 

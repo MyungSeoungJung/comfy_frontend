@@ -113,3 +113,56 @@
     margin-right: 20px;
     border-radius: 50%;
 }
+
+.my-study-info {
+    height: 300px;
+    border: 1px solid #d1d1d1;
+    margin-top: 24px;
+    padding: 24px;
+}
+
+.my-study-info>div>button {
+    background-color: unset;
+    padding-left: 6px;
+    padding-right: 6px;
+}
+
+.my-study-list {
+    margin-top: 24px;
+}
+
+.my-commnet-info {
+    height: 300px;
+    border: 1px solid #d1d1d1;
+    margin-top: 24px;
+    padding: 24px;
+}
+
+#myPage-content-contain {
+    display: flex;
+    flex-direction: row;
+    background-color: red;
+    min-height: 170px;
+    max-height: 170px;
+}
+
+/* 모집상태 닉ㄴ에ㅣㅁ */
+#myPage-content-top {
+    display: flex;
+    flex-direction: row;
+    flex: 1;
+}
+
+/* 게시글 */
+#myPage-content-middle {
+    background-color: blue;
+    flex: 2;
+}
+
+/* 좋아요 */
+#myPage-content-bottom {
+    background-color: #2fc97a;
+    display: flex;
+    flex-direction: row;
+    flex: 1;
+}

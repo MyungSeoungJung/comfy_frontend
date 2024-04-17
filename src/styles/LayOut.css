@@ -23,6 +23,7 @@
   padding: 8px 12px 20px;
   position: relative;
   width: 100%;
+
 }
 
 .navigation .inner .logo {
@@ -49,6 +50,26 @@
 /*  왼쪽 네비게이션바 탭부분 */
 .navigation .inner .tabs {
   margin-left: 20px;
+  height: 78%;
+}
+
+.PolarisNavigation {
+  margin-left: 20px;
+  display: flex;
+  align-items: center;
+}
+
+.PolarisNavigation svg {
+  margin-right: 12px;
+  font-size: 30px;
+}
+
+.navigation .inner .tabs ul li svg {
+  font-size: 30px;
+  stroke-width: 0.7px;
+  color: inherit;
+  text-decoration: none;
+  color: black;
 }
 
 .navigation .inner .tabs li {
@@ -59,9 +80,8 @@
 .navigation .inner .tabs li>svg {
   content: "";
   display: inline-block;
-  height: 24px;
-  width: 24px;
   align-items: center;
+  font-size: 30px;
 }
 
 .navigation .inner .tabs li a {

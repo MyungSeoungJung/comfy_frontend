@@ -9,6 +9,9 @@ import TabComponent from "../tabComponent/TabComponent";
 import { isLocalhost } from "../../utils/DomainUrl";
 import Pagination from "react-js-pagination";
 import '../../styles/Paging.css'
+import { PiChatCircle } from "react-icons/pi";
+import { GoPencil } from "react-icons/go";
+import { formatCreateTime } from "../../utils/formatCreateTime";
 
 const CreateStudyGruop = () => {
     const [writeModalHandle, setWriteModalHandle] = useState(false);
@@ -67,16 +70,7 @@ const CreateStudyGruop = () => {
         const url = `/study/studyDetailPage?id=${studyId}`;
         navigate(url);
     };
-    //  시간 format
-    const formatCreateTime = (createTime) => {
-        if (!createTime) return ""; // 빈 값인 경우 빈 문자열 반환
-        const date = new Date(createTime[0], createTime[1] - 1, createTime[2], createTime[3], createTime[4], createTime[5], createTime[6] / 1000000);
-        const day = date.getDate().toString().padStart(2, '0');
-        const month = (date.getMonth() + 1).toString().padStart(2, '0');
-        const year = date.getFullYear().toString().slice(2);
 
-        return `${year}.${month}.${day}`;
-    };
     return (
         <div className="create-study-wrapper">
             <div className="create-study-banner">
@@ -101,8 +95,8 @@ const CreateStudyGruop = () => {
                         {/* 게시글 컨테이너 영역 */}
                         <div className="create-study-content">
                             <div className="create-study-content-top">
-                                <div><button>최신순</button></div>
-                                <div> <button onClick={openWriteModal}>글쓰기</button></div>
+                                <div><button>최신순</button><button>댓글많은순</button><button>좋아요순</button></div>
+                                <div> <button onClick={openWriteModal}><span><GoPencil /></span><span>글쓰기</span></button></div>
                             </div>
 
 
@@ -125,20 +119,22 @@ const CreateStudyGruop = () => {
                                         </div>
 
                                         <div id="study-content-bottom">
-                                            <div><span>{study.creatorNickName}</span> <span>{formatCreateTime(study.createdTime)}</span></div>
-                                            <div><IoIosHeartEmpty /><span>{study.totalHeart}</span> <span>{study.totalComment}</span></div>
+                                            <div><span>{study.creatorNickName}</span> <span style={{ marginTop: "2px" }}>{formatCreateTime(study.createdTime)}</span></div>
+                                            <div><IoIosHeartEmpty /><span>{study.totalHeart}</span> <PiChatCircle style={{ strokeWidth: "20px" }} /><span>{study.totalComment}</span></div>
                                         </div>
                                     </div>
                                 ))}
                                 <div>
                                     <Pagination
                                         activePage={page}
-                                        itemsCountPerPage={10}
+                                        // itemsCountPerPage={5}
                                         // 총 리스트 페이지네이션 숫자
-                                        totalItemsCount={450}
-                                        pageRangeDisplayed={totalPages}
+                                        totalItemsCount={totalPages + 10}
+                                        pageRangeDisplayed={5}
                                         prevPageText={"‹"}
                                         nextPageText={"›"}
+                                        firstPageText={"«"}
+                                        lastPageText={"»"}
                                         onChange={handlePageChange}
                                     />
                                 </div>

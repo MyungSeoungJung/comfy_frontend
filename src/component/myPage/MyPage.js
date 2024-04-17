@@ -2,15 +2,22 @@ import React, { useEffect, useState } from "react";
 import "../../styles/MyPage.css";
 import http from "../../utils/http";
 import { isLocalhost } from "../../utils/DomainUrl"
+import Pagination from "react-js-pagination";
+import { IoIosHeartEmpty } from "react-icons/io";
+import { PiChatCircle } from "react-icons/pi";
+import { formatCreateTime } from "../../utils/formatCreateTime";
+import { useNavigate } from "react-router-dom";
+
 const MyPage = () => {
-
-
     const [userInfo, setUserInfo] = useState({
         nickname: "",
         introduction: "",
         userImg: ""
     });
-
+    const navigate = useNavigate();
+    const [page, setPage] = useState(1);
+    const [totalPages, setTotalPages] = useState(1);
+    const [study, setStudy] = useState([]);
     let uuidFilename = userInfo.userImg;
 
     useEffect(() => {
@@ -23,12 +30,35 @@ const MyPage = () => {
                     introduction: introduce,
                     userImg: userImg
                 });
+
             } catch (error) {
                 console.error("Failed to fetch user information:", error);
             }
         };
         fetchData();
     }, []);
+
+    // 페이지네이션
+    const handlePageChange = async (pageNumber) => {
+        try {
+            const response = await http.get('/study/getStudyPaging', {
+                params: {
+                    page: pageNumber, // 변경된 페이지 번호
+                    size: 1 // 페이지 당 아이템 수
+                }
+            });
+            setStudy(response.data.content)
+            setTotalPages(response.data.totalPages)
+            setPage(pageNumber);
+        } catch (error) {
+            console.error('Error fetching study data:', error);
+            // 에러 처리 로직 추가
+        }
+    };
+    // 페이지 네이션 useEffect
+    useEffect(() => {
+        handlePageChange(page);
+    }, [page == 0]);
 
     const handleNicknameChange = (event) => {
         setUserInfo({
@@ -55,6 +85,11 @@ const MyPage = () => {
         }
     };
 
+    // 스터디 클릭하면 디테일 페이지로 이동
+    const handleStudyClick = (studyId) => {
+        const url = `/study/studyDetailPage?id=${studyId}`;
+        navigate(url);
+    };
     return (
         <div className="myPage-contain">
             <div className="myPage-banner">
@@ -97,6 +132,44 @@ const MyPage = () => {
                 </div>
                 <button type="submit">저장하기</button>
             </form>
+            <div className="my-study-info">
+                <div>
+                    <button>전체</button>
+                    <button>모집중</button>
+                    <button>모집완료</button>
+                </div>
+                {/* 내가 작성한 스터디 */}
+                <div className="my-study-list">
+                    {study.map((study, idx) => (
+                        <div id="myPage-content-contain"
+                            key={"study-id-" + study.id + "," + idx}
+                            onClick={() => handleStudyClick(study.id)}>
+                            <div id="myPage-content-top">
+                                <span id="myPage-recruit-status">{study.recruitStatus}</span> <h3>{study.title}</h3>
+                            </div>
+                            <div id="myPage-content-middle">{study.content}</div>
+                            <div id="myPage-content-bottom">
+                                <div><span>{study.creatorNickName}</span> <span style={{ marginTop: "2px" }}>{formatCreateTime(study.createdTime)}</span></div>
+                                <div><IoIosHeartEmpty /><span>{study.totalHeart}</span> <PiChatCircle style={{ strokeWidth: "20px" }} /><span>{study.totalComment}</span></div>
+                            </div>
+                        </div>
+                    ))}
+
+                </div>
+                <Pagination
+                    activePage={page}
+                    // itemsCountPerPage={5}
+                    // 총 리스트 페이지네이션 숫자
+                    totalItemsCount={totalPages + 10}
+                    pageRangeDisplayed={5}
+                    prevPageText={"‹"}
+                    nextPageText={"›"}
+                    firstPageText={"«"}
+                    lastPageText={"»"}
+                    onChange={handlePageChange}
+                />
+            </div>
+            <div className="my-commnet-info">내가 작성한 댓글</div>
         </div>
     );
 };
