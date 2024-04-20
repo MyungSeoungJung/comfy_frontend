@@ -129,6 +129,9 @@
 
 .my-study-list {
     margin-top: 24px;
+    min-height: 165px;
+    display: flex;
+    flex-direction: row;
 }
 
 .my-commnet-info {
@@ -140,29 +143,59 @@
 
 #myPage-content-contain {
     display: flex;
-    flex-direction: row;
-    background-color: red;
-    min-height: 170px;
-    max-height: 170px;
+    margin-right: 12px;
+    flex-direction: column;
+    width: 230px;
+    border: 1px solid black;
+    border-radius: 12px;
+    height: 170px;
+    justify-content: center;
+    align-items: center;
+
 }
 
-/* 모집상태 닉ㄴ에ㅣㅁ */
+/* 모집상태*/
 #myPage-content-top {
     display: flex;
+    width: 100%;
     flex-direction: row;
     flex: 1;
+    padding-top: 6px;
+    padding-left: 3px;
+    background-color: #2fc97a;
+    border-top-left-radius: 12px;
+    border-top-right-radius: 12px;
+}
+
+#myPage-content-top span {
+    margin-left: 3px;
+    margin-right: 6px;
+    background-color: #2fc97a;
+    border-radius: 12px;
+    padding: 6px;
+    font-size: 0.8rem;
+    color: white;
 }
 
 /* 게시글 */
 #myPage-content-middle {
-    background-color: blue;
     flex: 2;
+    width: 100%;
+    padding: 6px;
+}
+
+.studyDetail-content p {
+    line-height: 2.2;
 }
 
 /* 좋아요 */
 #myPage-content-bottom {
-    background-color: #2fc97a;
     display: flex;
     flex-direction: row;
+    width: 100%;
     flex: 1;
+    justify-content: space-between;
+    padding-left: 8px;
+    padding-right: 6px;
+    align-items: center;
 }

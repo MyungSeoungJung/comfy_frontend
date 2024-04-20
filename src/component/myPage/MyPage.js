@@ -41,7 +41,7 @@ const MyPage = () => {
     // 페이지네이션
     const handlePageChange = async (pageNumber) => {
         try {
-            const response = await http.get('/study/getStudyPaging', {
+            const response = await http.get('/study/getMyStudy', {
                 params: {
                     page: pageNumber, // 변경된 페이지 번호
                     size: 1 // 페이지 당 아이템 수
@@ -149,18 +149,17 @@ const MyPage = () => {
                             </div>
                             <div id="myPage-content-middle">{study.content}</div>
                             <div id="myPage-content-bottom">
-                                <div><span>{study.creatorNickName}</span> <span style={{ marginTop: "2px" }}>{formatCreateTime(study.createdTime)}</span></div>
+                                <div><span style={{ marginTop: "2px" }}>{formatCreateTime(study.createdTime)}</span></div>
                                 <div><IoIosHeartEmpty /><span>{study.totalHeart}</span> <PiChatCircle style={{ strokeWidth: "20px" }} /><span>{study.totalComment}</span></div>
                             </div>
                         </div>
                     ))}
-
                 </div>
                 <Pagination
                     activePage={page}
-                    // itemsCountPerPage={5}
+                    // itemsCountPerPage={1}
                     // 총 리스트 페이지네이션 숫자
-                    totalItemsCount={totalPages + 10}
+                    totalItemsCount={totalPages / 10}
                     pageRangeDisplayed={5}
                     prevPageText={"‹"}
                     nextPageText={"›"}

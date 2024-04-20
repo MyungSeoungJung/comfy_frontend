@@ -1,0 +1,59 @@
+/* 슬라이든 */
+.similar-study-contain {
+    height: 140px;
+    width: 150px;
+    padding: 20px;
+    background-color: rgba(207, 207, 207, 0.12);
+    border: 1px solid rgba(102, 102, 102, 0.24);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, .05), 0 10px 15px -5px rgba(0, 0, 0, .05), 0 7px 7px -5px rgba(0, 0, 0, .04);
+    border-radius: 12px;
+}
+
+
+.similar-study-contain>div {
+    display: flex;
+    height: 90%;
+
+}
+
+.similar-study-contain>div:nth-of-type(2) span {
+    /* background-color: red; */
+    margin-top: 2px;
+    margin-left: 5px;
+}
+
+.similar-study-contain>div:nth-of-type(2) {
+    color: rgb(85, 85, 85);
+    font-size: 0.9rem;
+}
+
+.similar-study-contain>div>span:nth-of-type(1) {
+    margin-right: 12px;
+}
+
+.slick-slide {
+    margin: 0 10px;
+}
+
+/* 점의 색상 변경 */
+.slick-dots li button:before {
+    color: #00c471;
+}
+
+.slick-dots li.slick-active button:before {
+    color: #00c471;
+}
+
+.slick-arrow::before {
+    background-color: rgb(199, 199, 199);
+    border-radius: 50%;
+}
+
+.slick-arrow:focus {
+    background-color: white;
+}
+
+.slick-dots {
+    position: relative;
+    margin-top: -17px !important;
+}

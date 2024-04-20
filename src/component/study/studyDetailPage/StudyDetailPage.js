@@ -6,7 +6,8 @@ import React, { useEffect, useState } from "react";
 import { useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import http from "../../../utils/http";
-import { isLocalhost } from "../../../utils/DomainUrl"
+import { isLocalhost } from "../../../utils/DomainUrl";
+import SimpleSlider from "../../slider/Slider";
 
 const StudyDetailPage = () => {
     const navigate = useNavigate();
@@ -132,10 +133,10 @@ const StudyDetailPage = () => {
                         </div>
                         <div className="study-item-horizontal"></div>
 
-                        <div className="similar-study" >
-                            <ul>
-                                <li> 비슷한 컨텐츠 </li>
-                            </ul>
+                        {/* 비슷한 게시물 */}
+                        <div className="SimpleSlider-contain" >
+                            <p>비슷한 게시물</p>
+                            <SimpleSlider></SimpleSlider>
                         </div>
                     </div>
                     <div className="studyDetail-side">
