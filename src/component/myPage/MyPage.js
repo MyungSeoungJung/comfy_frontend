@@ -44,7 +44,7 @@ const MyPage = () => {
             const response = await http.get('/study/getMyStudy', {
                 params: {
                     page: pageNumber, // 변경된 페이지 번호
-                    size: 1 // 페이지 당 아이템 수
+                    size: 3 // 페이지 당 아이템 수
                 }
             });
             setStudy(response.data.content)
@@ -145,21 +145,22 @@ const MyPage = () => {
                             key={"study-id-" + study.id + "," + idx}
                             onClick={() => handleStudyClick(study.id)}>
                             <div id="myPage-content-top">
-                                <span id="myPage-recruit-status">{study.recruitStatus}</span> <h3>{study.title}</h3>
+                                <h1>{study.title}</h1>
                             </div>
                             <div id="myPage-content-middle">{study.content}</div>
                             <div id="myPage-content-bottom">
+                                <span id="myPage-recruit-status">{study.recruitStatus}</span>
                                 <div><span style={{ marginTop: "2px" }}>{formatCreateTime(study.createdTime)}</span></div>
-                                <div><IoIosHeartEmpty /><span>{study.totalHeart}</span> <PiChatCircle style={{ strokeWidth: "20px" }} /><span>{study.totalComment}</span></div>
+                                <div><IoIosHeartEmpty /><span>{study.totalHeart}</span> <PiChatCircle /><span>{study.totalComment}</span></div>
                             </div>
                         </div>
                     ))}
                 </div>
                 <Pagination
                     activePage={page}
-                    // itemsCountPerPage={1}
+                    itemsCountPerPage={1}
                     // 총 리스트 페이지네이션 숫자
-                    totalItemsCount={totalPages / 10}
+                    totalItemsCount={totalPages}
                     pageRangeDisplayed={5}
                     prevPageText={"‹"}
                     nextPageText={"›"}

@@ -146,12 +146,12 @@
     margin-right: 12px;
     flex-direction: column;
     width: 230px;
-    border: 1px solid black;
     border-radius: 12px;
     height: 170px;
     justify-content: center;
     align-items: center;
-
+    border: 1px solid rgba(75, 75, 75, 0.24);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, .05), 0 10px 20px -5px rgba(0, 0, 0, .05), 0 7px 14px -5px rgba(0, 0, 0, .04);
 }
 
 /* 모집상태*/
@@ -160,21 +160,43 @@
     width: 100%;
     flex-direction: row;
     flex: 1;
-    padding-top: 6px;
+    padding-top: 10px;
     padding-left: 3px;
-    background-color: #2fc97a;
     border-top-left-radius: 12px;
     border-top-right-radius: 12px;
+    padding-left: 10px;
 }
 
-#myPage-content-top span {
-    margin-left: 3px;
-    margin-right: 6px;
+#myPage-content-top h1 {
+    color: #2fc97a;
+    font-weight: 800;
+}
+
+#myPage-content-bottom>span:nth-of-type(1) {
     background-color: #2fc97a;
     border-radius: 12px;
     padding: 6px;
     font-size: 0.8rem;
     color: white;
+    margin-top: 4px;
+    margin-bottom: 6px;
+}
+
+
+#myPage-content-bottom>div:nth-of-type(2) {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    color: gray;
+}
+
+#myPage-content-bottom>div:nth-of-type(2) span:nth-of-type(1) {
+    margin-right: 6px;
+
+}
+
+#myPage-content-bottom>div:nth-of-type(2) svg {
+    margin-right: 3px;
 }
 
 /* 게시글 */
@@ -182,6 +204,9 @@
     flex: 2;
     width: 100%;
     padding: 6px;
+    padding-left: 10px;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .studyDetail-content p {
@@ -196,6 +221,9 @@
     flex: 1;
     justify-content: space-between;
     padding-left: 8px;
-    padding-right: 6px;
+    padding-right: 8px;
     align-items: center;
+    padding-right: 15px;
+    color: gray;
+
 }

@@ -151,18 +151,24 @@ const StudyDetailPage = () => {
                         {/* 댓글 영역 */}
                         <div className="studyDetail-comment">
                             <div className="studyDetail-comment-view">
-                                {studyComment.map((studyComment, idx) => {
-                                    const uuidFilename = studyComment.userImg;
-                                    return (
-                                        <div className="comment-content">
-                                            <img src={`${isLocalhost()}user/file/${uuidFilename}`} id="comment-profile-img" />
-                                            <div><h2>{studyComment.userNickName}</h2>  <p>{studyComment.content}</p></div>
-                                        </div>
-                                    )
-                                }
+                                {studyComment.length === 0 ? (
+                                    <div className="noCommentImg"></div>
+                                ) : (
+                                    studyComment.map((studyComment, idx) => {
+                                        const uuidFilename = studyComment.userImg;
+                                        return (
+                                            <div className="comment-content" key={idx}>
+                                                <img src={`${isLocalhost()}user/file/${uuidFilename}`} id="comment-profile-img" alt="Profile" />
+                                                <div>
+                                                    <h2>{studyComment.userNickName}</h2>
+                                                    <p>{studyComment.content}</p>
+                                                </div>
+                                            </div>
+                                        );
+                                    })
                                 )}
-
                             </div>
+
                             <div className="studyDetail-comment-heart">
                                 <div>{heartFilled ? <IoHeartSharp className="fill-heart" onClick={handleHeartClick} /> : <IoHeartOutline className="empty-heart" onClick={handleHeartClick} />}
                                     <IoChatbubbleOutline className="chat-icon" writerId={study.writerId} onClick={handleChat} />

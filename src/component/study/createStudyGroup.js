@@ -48,7 +48,7 @@ const CreateStudyGruop = () => {
             const response = await http.get('/study/getStudyPaging', {
                 params: {
                     page: pageNumber, // 변경된 페이지 번호
-                    size: 1 // 페이지 당 아이템 수
+                    size: 3 // 페이지 당 아이템 수
                 }
             });
             setStudy(response.data.content)
@@ -127,9 +127,10 @@ const CreateStudyGruop = () => {
                                 <div>
                                     <Pagination
                                         activePage={page}
-                                        // itemsCountPerPage={5}
+                                        // 최소한 보여줄 아이템 개수
+                                        itemsCountPerPage={1}
                                         // 총 리스트 페이지네이션 숫자
-                                        totalItemsCount={totalPages + 10}
+                                        totalItemsCount={totalPages}
                                         pageRangeDisplayed={5}
                                         prevPageText={"‹"}
                                         nextPageText={"›"}
