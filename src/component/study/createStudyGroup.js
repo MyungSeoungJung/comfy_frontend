@@ -12,7 +12,6 @@ import '../../styles/Paging.css'
 import { PiChatCircle } from "react-icons/pi";
 import { GoPencil } from "react-icons/go";
 import { formatCreateTime } from "../../utils/formatCreateTime";
-
 const CreateStudyGruop = () => {
     const [writeModalHandle, setWriteModalHandle] = useState(false);
     const [study, setStudy] = useState([]);
@@ -179,6 +178,7 @@ const CreateStudyGruop = () => {
                 {writeModalHandle && <WriteModal isOpen={openWriteModal} onClose={closeWriteModal} />}
             </div>
         </div>
+
     );
 }
 

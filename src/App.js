@@ -40,7 +40,6 @@ function App() {
           <Route index element={<CreateStudyGruop />} />
           <Route key="StudyDetailPage" path="study/:id" element={<StudyDetailPage />} />
           <Route key="MyPage" path="MyPage" element={<MyPage />} />
-          {/* <Route key="TabComponent" path="TabComponent" element={<TabComponent />} /> */}
         </Route>
         {/* 채팅 */}
         <Route path="ChatModal" key="ChatModal" element={<ChatModal />}>

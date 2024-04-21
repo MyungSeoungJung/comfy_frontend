@@ -12,8 +12,8 @@ const http = axios.create({
 // 요청값에 대해서 사전처리
 http.interceptors.request.use((config) => {
     const token = getCookie("token");
-    console.log("---token---");
-    console.log(token);
+    // console.log("---token---");
+    // console.log(token);
     if (token) {
         config.headers.Authorization = `Bearer ${token}`;
     } else {
@@ -29,7 +29,7 @@ http.interceptors.response.use(
         const { status } = error.response;
 
         if (status === 401 || status == 403) {
-            alert("인증이 필요하거나 토큰이 만료되었습니다.");
+            // alert("인증이 필요하거나 토큰이 만료되었습니다.");
             // 로그인 페이지로 이동
             // window.location.href = "/"
         }

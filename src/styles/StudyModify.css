@@ -1,0 +1,159 @@
+input {
+    width: 100%;
+    border: none;
+    outline: none;
+}
+
+.studyModify-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    z-index: 100;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+}
+
+.studyModify-wrapper {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    width: 800px;
+    height: 600px;
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    padding-bottom: 0px;
+}
+
+.studyModify-logo {
+    width: 100%;
+    /* background-color: red; */
+    display: flex;
+    justify-content: center;
+}
+
+.studyModify-logo>div {
+    background-image: url(../../public/assets/logo1.png);
+    background-position: 50%;
+    background-repeat: no-repeat;
+    background-size: 100% auto;
+    display: inline-block;
+    height: 50px;
+    width: 250px;
+    justify-content: center;
+}
+
+.studyModify-category>p:nth-of-type(2) {
+    margin-left: 10px;
+}
+
+.studyModify-category>p:nth-of-type(3) {
+    margin-left: 10px;
+}
+
+/* 검색, 글쓰기 div */
+/* .studyModify-content {
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 10px;
+    flex: 1;
+} */
+/* 태그 추가 input div */
+.studyModify-content>div:nth-of-type(2) {
+    margin-bottom: 12px
+}
+
+/* 모집 상태 div 영역 */
+.studyModify-content>div:nth-of-type(1) {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    margin-bottom: 10px;
+    align-items: center;
+
+}
+
+/* 내용 div 영역 */
+.studyModify-content>div:nth-of-type(3) {
+    display: flex;
+    height: 300px;
+}
+
+#titleInput {
+    height: 50px;
+    font-size: 2rem;
+}
+
+
+
+#tagArray {
+    height: 30px;
+    display: flex;
+    justify-content: left;
+    color: #3e4042;
+    margin-top: 12px;
+    margin-bottom: 12px;
+}
+
+#tagArray button {
+    width: 15px;
+    height: 15px;
+    margin-right: 5px;
+    background-color: #dee2e6;
+    color: rgb(73, 80, 87);
+    font-size: 0.8rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#tagArray p {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin-right: 4px;
+    background-color: #dee2e6;
+    padding: 3px 10px;
+    font-size: 0.8rem;
+    border-radius: 3px;
+}
+
+.studyModify-content>div>textarea {
+    border: #dee2e6 solid 1px;
+    border-radius: 8px;
+    width: 100%;
+    padding-left: 10px;
+    padding-top: 10px;
+    resize: none;
+    height: 100%;
+}
+
+.studyModify-content>div:nth-of-type(5) {
+    display: flex;
+    justify-content: right;
+    margin-top: 10px;
+    justify-content: center;
+    align-items: center;
+}
+
+.studyModify-content div button {
+    width: 70px;
+    height: 40px;
+    background-color: white;
+    border: 1px solid #dee2e6;
+
+}
+
+.studyModify-content div button:nth-of-type(2) {
+    width: 70px;
+    height: 40px;
+    margin-left: 10px;
+    background-color: #00c471;
+    color: white;
+    border: none;
+}

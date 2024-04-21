@@ -132,6 +132,7 @@
     min-height: 165px;
     display: flex;
     flex-direction: row;
+    padding-left: 17px;
 }
 
 .my-commnet-info {
@@ -225,5 +226,4 @@
     align-items: center;
     padding-right: 15px;
     color: gray;
-
 }

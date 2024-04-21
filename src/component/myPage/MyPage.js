@@ -7,6 +7,7 @@ import { IoIosHeartEmpty } from "react-icons/io";
 import { PiChatCircle } from "react-icons/pi";
 import { formatCreateTime } from "../../utils/formatCreateTime";
 import { useNavigate } from "react-router-dom";
+import StudyModifyModal from "../myPage/StudyModifyModal";
 
 const MyPage = () => {
     const [userInfo, setUserInfo] = useState({
@@ -18,7 +19,9 @@ const MyPage = () => {
     const [page, setPage] = useState(1);
     const [totalPages, setTotalPages] = useState(1);
     const [study, setStudy] = useState([]);
+    const [studyId, setStudyId] = useState([]);
     let uuidFilename = userInfo.userImg;
+    const [studyModifyHandle, setStudyModifyHandle] = useState(false);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -85,11 +88,16 @@ const MyPage = () => {
         }
     };
 
-    // 스터디 클릭하면 디테일 페이지로 이동
-    const handleStudyClick = (studyId) => {
-        const url = `/study/studyDetailPage?id=${studyId}`;
-        navigate(url);
+
+    const openStudyModify = (id) => {
+        setStudyModifyHandle(true);
+        setStudyId(id)
     };
+
+    const closeStudyModify = () => {
+        setStudyModifyHandle(false);
+    };
+
     return (
         <div className="myPage-contain">
             <div className="myPage-banner">
@@ -143,7 +151,7 @@ const MyPage = () => {
                     {study.map((study, idx) => (
                         <div id="myPage-content-contain"
                             key={"study-id-" + study.id + "," + idx}
-                            onClick={() => handleStudyClick(study.id)}>
+                            onClick={() => openStudyModify(study.id)}>
                             <div id="myPage-content-top">
                                 <h1>{study.title}</h1>
                             </div>
@@ -170,7 +178,9 @@ const MyPage = () => {
                 />
             </div>
             <div className="my-commnet-info">내가 작성한 댓글</div>
+            {studyModifyHandle && <StudyModifyModal onClose={closeStudyModify} studyId={studyId} />}
         </div>
+
     );
 };
 
