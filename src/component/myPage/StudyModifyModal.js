@@ -8,20 +8,30 @@ const StudyModifyModal = ({ onClose, studyId }) => {
     const contentRef = useRef();
     const [tags, setTags] = useState([]);
     const [study, setStudy] = useState({});
-    const navigate = useNavigate();
-
+    const [recruitStatus, setRecruitStatus] = useState("");
     // 태그 삭제
     const removeTag = (tag) => {
         // 서버로부터 받은 스터디 정보를 업데이트하여 해당 태그를 제거
         const newTags = study.hashTags.filter((t) => t !== tag);
         setStudy({ ...study, hashTags: newTags });
+
+
     };
 
+    const recruitStatusHandle = () => {
+        setRecruitStatus((prevStatus) => {
+            const updatedStatus = prevStatus === "모집중" ? "모집완료" : "모집중";
+            setRecruitStatus(updatedStatus);
+            console.log(updatedStatus);
+            return updatedStatus;
+        });
+    }
 
     useEffect(() => {
         const fetchData = async () => {
             const studyResponse = await http.get(`study/studyDetailPage?id=${studyId}`);
             setStudy(studyResponse.data)
+            setRecruitStatus(studyResponse.data.recruitStatus)
         }
         fetchData();
     }, [])
@@ -48,6 +58,14 @@ const StudyModifyModal = ({ onClose, studyId }) => {
     const modifyStudy = async (e) => {
         e.preventDefault();
 
+        const data = {
+            id: studyId,
+            title: titleRef.current.value,
+            content: contentRef.current.value,
+            tagNames: study.hashTags,
+            recruitStatus: recruitStatus,
+        }
+        const response = http.put("/study/studyModify", data)
     }
 
     return (
@@ -59,7 +77,9 @@ const StudyModifyModal = ({ onClose, studyId }) => {
                     </div>
                     <div className="studyModify-content">
                         <div>
-                            <RecruitStatusBtn recruitStatus={study.recruitStatus} />
+                            {/* 모집상태 수정 버튼 */}
+                            <RecruitStatusBtn recruitStatus={recruitStatus} onClick={recruitStatusHandle} />
+
                             <input ref={titleRef} id="titleInput" type="text" name="" placeholder="제목에 핵심 내용을 요약해보세요" value={study.title}
                                 onChange={(e) => setStudy({ ...study, title: e.target.value })} />
                         </div>

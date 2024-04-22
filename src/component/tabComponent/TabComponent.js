@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
 import "./TabComponent.css"
 
-function TabComponent() {
+function TabComponent({ clickStudyRecruitState }) {
     const [activeTab, setActiveTab] = useState(0);
 
-    const handleTabClick = (index) => {
+    const handleTabClick = (index, value) => {
         setActiveTab(index);
+        clickStudyRecruitState(value);
     };
 
     return (
@@ -14,7 +15,7 @@ function TabComponent() {
                 <li
                     key={index}
                     className={index === activeTab ? 'tab active' : 'tab'}
-                    onClick={() => handleTabClick(index)}>
+                    onClick={() => handleTabClick(index, tab.value)}>
                     {tab.label}
                 </li>
             ))}
@@ -22,12 +23,11 @@ function TabComponent() {
 
     );
 }
-
-// 예시 탭 데이터
 const tabs = [
-    { label: '전체' },
-    { label: '모집중' },
-    { label: '모집 완료' }
+    { label: '전체', value: 'ALL' },
+    { label: '모집중', value: 'RECRUITING' },
+    { label: '모집 완료', value: 'COMPLETED' }
 ];
+
 
 export default TabComponent;

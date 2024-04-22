@@ -20,7 +20,8 @@ const CreateStudyGruop = () => {
     const navigate = useNavigate();
     const [page, setPage] = useState(1);
     const [totalPages, setTotalPages] = useState(1);
-
+    const [studyRecruitState, setStudyRecruitState] = useState("ALL");
+    const [studySort, setStudySort] = useState("RECENT");
 
     const openWriteModal = () => {
         setWriteModalHandle(true);
@@ -41,7 +42,7 @@ const CreateStudyGruop = () => {
         fetchData();
     }, []);
 
-    // 페이지 네이션
+    // 게시글 get (페이지네이션)
     const handlePageChange = async (pageNumber) => {
         try {
             const response = await http.get('/study/getStudyPaging', {
@@ -69,7 +70,37 @@ const CreateStudyGruop = () => {
         const url = `/study/studyDetailPage?id=${studyId}`;
         navigate(url);
     };
+    // 모집중 모집완료 탭 클릭핸들
+    const StudyRecruitStateHandle = (state) => {
+        setStudyRecruitState(state);
+    }
+    //  모집 상태 변경에 맞춰 useEffect
+    useEffect(() => {
+        const fetchStudyData = async () => {
+            try {
+                const response = await http.get('/study/getStudyState', {
+                    params: {
+                        page: 1,
+                        size: 3,
+                        state: studyRecruitState,
+                        sort: studySort,
+                    }
+                });
+                setStudy(response.data.content);
+                setTotalPages(response.data.totalPages);
+                setPage(1);
+            } catch (error) {
+                console.error('Error fetching study data:', error);
+                // 에러 처리 로직 추가
+            }
+        };
 
+        fetchStudyData();
+    }, [studyRecruitState, studySort]);
+
+    const StudySorteHandle = (state) => {
+        setStudySort(state);
+    }
     return (
         <div className="create-study-wrapper">
             <div className="create-study-banner">
@@ -81,7 +112,7 @@ const CreateStudyGruop = () => {
                 <div className="create-study-center">
                     <div className="create-study-contain">
                         <div className="create-study-state">
-                            <TabComponent />
+                            <TabComponent clickStudyRecruitState={StudyRecruitStateHandle} />
                         </div>
 
                         {/* 검색창 */}
@@ -93,9 +124,13 @@ const CreateStudyGruop = () => {
 
                         {/* 게시글 컨테이너 영역 */}
                         <div className="create-study-content">
+                            {/* 게시글 최신순,좋아요순 정렬 버튼 */}
                             <div className="create-study-content-top">
-                                <div><button>최신순</button><button>댓글많은순</button><button>좋아요순</button></div>
-                                <div> <button onClick={openWriteModal}><span><GoPencil /></span><span>글쓰기</span></button></div>
+                                <div>
+                                    <button onClick={() => StudySorteHandle('RECENT')}>최신순</button>
+                                    <button onClick={() => StudySorteHandle('SCORE')}>댓글많은순</button>
+                                    <button onClick={() => StudySorteHandle('COMMENTS')}>좋아요순</button>
+                                </div>                                <div> <button onClick={openWriteModal}><span><GoPencil /></span><span>글쓰기</span></button></div>
                             </div>
 
 

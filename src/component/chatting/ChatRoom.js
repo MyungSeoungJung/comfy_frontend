@@ -101,7 +101,6 @@ const ChatRoom = () => {
 
     return (
         <div className="logList">
-
             <div className="logList">
                 {chatLog.map((item, index) => {
                     const uuidFilename = item.profileImg;

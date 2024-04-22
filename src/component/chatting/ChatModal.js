@@ -193,7 +193,7 @@ const ChatModal = () => {
                         <div className="chatLog-toUserNickName"><img src={`${roomProfileImg}`} style={{ width: "50px", height: "50px", borderRadius: "50%", }} />
                             <p> {roomNick} </p></div>
 
-                        <Outlet context={{ receiveMessage, currentRoomId, myInfo, currentUserId, stompClient, setCurrentUserId, setCurrentRoomId }} />)
+                        <Outlet context={{ receiveMessage, currentRoomId, myInfo, currentUserId, stompClient, setCurrentUserId, setCurrentRoomId }} />
 
                     </div>
                 ) : (
