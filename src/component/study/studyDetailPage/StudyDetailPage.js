@@ -5,8 +5,9 @@ import { IoChatbubbleOutline } from "react-icons/io5";
 import React, { useEffect, useState } from "react";
 import { useRef } from "react";
 import { useNavigate } from "react-router-dom";
-
 import http from "../../../utils/http";
+import { isLocalhost } from "../../../utils/DomainUrl";
+import SimpleSlider from "../../slider/Slider";
 
 const StudyDetailPage = () => {
     const navigate = useNavigate();
@@ -15,7 +16,7 @@ const StudyDetailPage = () => {
     const [totalHearts, setTotalHearts] = useState(0);
     const commentRef = useRef();
     const [studyComment, setStudyComment] = useState([]); //댓글 작성 유저 정보
-    const [userInfo, setUserInfo] = useState({ userImg: "", userNickName: "" });  // 로그인한 유저 정보
+    const [userInfo, setUserInfo] = useState({ userImg: "", userNickName: "", userId: "" });  // 로그인한 유저 정보
     //하트 클릭
     const handleHeartClick = async () => {
         const id = window.location.search;
@@ -35,8 +36,17 @@ const StudyDetailPage = () => {
     };
     // 채팅 이동
     const handleChat = () => {
-        navigate(`/ChatModal?toUserId=${study.writerId}`);
+        const url = `/ChatModal/chat/${userInfo.userId}/m/${study.writerId}`;
+        navigate(url, {
+            state: {
+                toUserId: study.writerId,
+                roomId: study.writerId + userInfo.userId,
+                toUserImg: study.writerImg,
+                toUserNick: study.creatorNickName // 작성자의 닉네임 정보 전달
+            }
+        });
     }
+    // 작성자 이미지 변수명 format
     let uuidFilename = study.writerImg;
 
     // 시간 format
@@ -65,13 +75,15 @@ const StudyDetailPage = () => {
                 setStudyComment(commentResponse.data);
 
                 // 사용자 정보 가져오기
-                const imgResponse = await http.get(`user/getUserInfo`);
-                setUserInfo({ userImg: imgResponse.data.userImg, userNickName: imgResponse.data.userNickName });
-
+                const userInfoResponse = await http.get(`user/getUserInfo`);
+                setUserInfo({ userImg: userInfoResponse.data.userImg, userNickName: userInfoResponse.data.userNickName, userId: userInfoResponse.data.userId }
+                );
+                console.log(userInfo.userId);
             } catch (error) {
                 console.error("Error fetching data:", error);
                 // 에러 처리
             }
+
         };
 
         fetchData();
@@ -121,10 +133,10 @@ const StudyDetailPage = () => {
                         </div>
                         <div className="study-item-horizontal"></div>
 
-                        <div className="similar-study" >
-                            <ul>
-                                <li> 비슷한 컨텐츠 </li>
-                            </ul>
+                        {/* 비슷한 게시물 */}
+                        <div className="SimpleSlider-contain" >
+                            <p>비슷한 게시물</p>
+                            <SimpleSlider></SimpleSlider>
                         </div>
                     </div>
                     <div className="studyDetail-side">
@@ -133,24 +145,30 @@ const StudyDetailPage = () => {
                                 <p> 작성한 스터디</p>
                             </div>
                             <div className="wrtier-img">
-                                <img src={`http://192.168.0.23:8080/user/file/${uuidFilename}`} alt="" />
+                                <img src={`${isLocalhost()}user/file/${uuidFilename}`} alt="" />
                             </div>
                         </div>
                         {/* 댓글 영역 */}
                         <div className="studyDetail-comment">
                             <div className="studyDetail-comment-view">
-                                {studyComment.map((studyComment, idx) => {
-                                    const uuidFilename = studyComment.userImg;
-                                    return (
-                                        <div className="comment-content">
-                                            <img src={`http://192.168.0.23:8080/user/file/${uuidFilename}`} id="comment-profile-img" />
-                                            <div><h2>{studyComment.userNickName}</h2>  <p>{studyComment.content}</p></div>
-                                        </div>
-                                    )
-                                }
+                                {studyComment.length === 0 ? (
+                                    <div className="noCommentImg"></div>
+                                ) : (
+                                    studyComment.map((studyComment, idx) => {
+                                        const uuidFilename = studyComment.userImg;
+                                        return (
+                                            <div className="comment-content" key={idx}>
+                                                <img src={`${isLocalhost()}user/file/${uuidFilename}`} id="comment-profile-img" alt="Profile" />
+                                                <div>
+                                                    <h2>{studyComment.userNickName}</h2>
+                                                    <p>{studyComment.content}</p>
+                                                </div>
+                                            </div>
+                                        );
+                                    })
                                 )}
-
                             </div>
+
                             <div className="studyDetail-comment-heart">
                                 <div>{heartFilled ? <IoHeartSharp className="fill-heart" onClick={handleHeartClick} /> : <IoHeartOutline className="empty-heart" onClick={handleHeartClick} />}
                                     <IoChatbubbleOutline className="chat-icon" writerId={study.writerId} onClick={handleChat} />

@@ -40,9 +40,12 @@ button {
 .create-study-contain {
     display: flex;
     flex: 3;
+    min-width: 700px;
     min-height: 100vh;
     flex-direction: column;
 }
+
+;
 
 /* 모집중 모집완료 컨테이너 */
 .create-study-state {
@@ -51,12 +54,6 @@ button {
     width: 100%;
     margin-bottom: 20px;
 }
-
-/* .create-study-state>button {
-    margin-right: 12px;
-    background-color: white;
-} */
-
 
 /*  오른쪽 인기태그 */
 .create-study-side {
@@ -69,6 +66,7 @@ button {
 
 .create-study-side>div:nth-of-type(1) {
     margin-bottom: 12px;
+
 }
 
 /* 스터디, 태그로 검색 부분 div */
@@ -124,8 +122,9 @@ button {
 .create-study-content-top {
     display: flex;
     flex-direction: row;
-    height: 40px;
-    margin-bottom: 12px;
+    height: 58px;
+    border-bottom: 1px solid #dee2e6;
+    padding-bottom: 12px;
 }
 
 .create-study-content-top div:nth-of-type(1) button {
@@ -146,12 +145,30 @@ button {
     flex: 0.1;
 }
 
+.create-study-content-top div:nth-of-type(2) button span {
+    display: inline-flex;
+    align-items: center;
+    font-size: 0.9rem;
+}
+
+.create-study-content-top div:nth-of-type(2) button span:nth-of-type(1) {
+    margin-right: 5px;
+    margin-top: 1px;
+}
+
 .create-study-content-top>div:nth-of-type(2) button {
+    display: flex;
+    align-items: center;
     background-color: #3e4042;
+    height: 42px;
+    border-color: #868e96;
     min-width: 96px;
     margin-left: 15px;
     color: white;
+    justify-content: center;
 }
+
+
 
 /* 게시글 콘텐츠 부분 div */
 .create-study-content-main {
@@ -163,7 +180,7 @@ button {
     display: flex;
     flex-direction: column;
     border-bottom: 1px solid #dee2e6;
-    border-top: 1px solid #dee2e6;
+    /* border-top: 1px solid #dee2e6; */
     padding-top: 18px;
     padding-bottom: 18px;
 }
@@ -192,11 +209,32 @@ button {
     display: flex;
     flex-direction: row;
     color: #868e96;
+    align-items: center;
+}
+
+#study-content-bottom svg {
+    stroke-width: 40px;
+    margin-right: 3px;
+    font-size: 0.9rem;
+}
+
+/* 이모티콘 div 영역 */
+#study-content-bottom>div:nth-of-type(2)>span {
+    margin-right: 10px;
+    font-size: 0.9rem;
+    font-weight: 600;
 }
 
 #study-content-bottom div {
     display: flex;
     flex: 1;
+    align-items: center;
+
+}
+
+
+#study-content-bottom>div:nth-of-type(1) span {
+    font-size: 0.8rem;
 }
 
 #study-content-bottom>div:nth-of-type(2) {

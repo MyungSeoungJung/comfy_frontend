@@ -64,7 +64,7 @@ const Home = () => {
                 </div>
                 <div className="hots">
                     <div className="items">
-                        <h4> 인기 번개 </h4>
+                        <h4> 최근 HOT한 스터디 </h4>
                         <ul>
                             <li>
                                 <a href="/">
@@ -102,7 +102,7 @@ const Home = () => {
                         <input type="text" placeholder="검색하기" />
                         <ul>
                             <li>
-                                <h4 className="search_title"> 번개 히스토리 </h4>
+                                <h4 className="search_title"> 인기 검색어 </h4>
                                 <a href="/">
                                     <div className="title"> 제주도 3박 4일 ㄱㄱ? </div>
                                     <button> 삭제 </button>

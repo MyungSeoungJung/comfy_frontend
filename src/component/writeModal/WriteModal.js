@@ -56,7 +56,7 @@ const WriteModal = ({ onClose }) => {
             <div className="modal-container">
                 <div className="modal-wrapper">
                     <div className="write-modal-category">
-                        <p>스터디 모집하기</p>
+                        <p>COMFY</p>
                     </div>
                     <div className="write-modal-content">
                         <div><input ref={titleRef} id="titleInput" type="text" name="" placeholder="제목에 핵심 내용을 요약해보세요" /></div>

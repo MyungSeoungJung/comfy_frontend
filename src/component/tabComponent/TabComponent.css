@@ -4,14 +4,15 @@
     padding-left: 0;
     width: 100%;
     position: relative;
+    margin-bottom: 24px;
 }
 
 .tab {
-    padding-bottom: 5px;
+    padding-bottom: 15px;
     cursor: pointer;
     padding-left: 20px;
     padding-right: 20px;
-
+    font-weight: 600;
 }
 
 .tab.active {

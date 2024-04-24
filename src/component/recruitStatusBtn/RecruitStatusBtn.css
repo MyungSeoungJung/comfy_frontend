@@ -1,0 +1,14 @@
+#RecruitingBtn {
+    background-color: #00c471;
+    margin-right: 10px;
+    color: white;
+    border: none;
+}
+
+#RecruitCompleteBtn {
+    background-color: #bebebe;
+    margin-right: 10px;
+    color: white;
+    border: none;
+    font-size: 0.9rem;
+}
